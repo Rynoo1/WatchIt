@@ -36,3 +36,76 @@
     transform: rotate(360deg);
   }
 }
+
+.prime {
+  color: #CED9BF !important;
+}
+
+.backgprime {
+  background-color: #CED9BF !important;
+}
+
+.backgblue {
+  background-color: #2C3439 !important;
+}
+
+.backgaccent{
+  background-color: #FF5035;
+}
+
+.blue {
+  color: #2C3439 !important;
+}
+
+.accent {
+  color: #FF5035 !important;
+}
+
+.white {
+  color: white !important;
+}
+
+.btn-accent{
+  background-color: #FF5035 !important; 
+  color: #FFFF !important;
+  border-radius: 0px !important;
+  box-shadow: 0.20em 0.2em 0.50em #171b1e;
+  font-size: 1.50rem !important;
+}
+
+.btn-accent:hover{
+  box-shadow: 0.25em 0.3em 0.50em rgb(0, 0, 0);
+}
+
+.linkaccent{
+  color: #FF5035 !important;
+  text-decoration: none !important;
+  font-size: 22px !important;
+}
+
+.linkaccent:hover{
+  text-decoration: underline !important;
+  font-size-adjust: 27px;
+}
+
+.roboto{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: bold !important;
+}
+
+.condensed{
+  font-family: 'Roboto Condensed', sans-serif !important;
+  font-weight: light !important;
+}
+
+.slidertext{
+  font-size: 33px;
+}
+
+.right{
+  float: right;
+}
+
+.carousel-control-next, .carousel-control-prev{
+  width: 10% !important;
+}
