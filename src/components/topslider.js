@@ -2,60 +2,59 @@ import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/esm/Container';
 import watch from '../images/watch.jpg';
-import { Row, Col } from 'react-bootstrap';
+import casio from '../images/retrocasio.jpg';
+import tank from '../images/cartiertank.jpg'
+import { Row, Col, Image } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 export default function TopSlider() {
     return (
 
-        <Carousel>
+        <Carousel interval={null}>
             <Carousel.Item className='backgblue'>
                 <Container className='pt-1 mt-5'>
-                    {/* <Row> */}
-                        {/* <Container className='mt-5'> */}
-                            <img className='right mb-3 me-2' src={watch}/>
+                    <Row>
+                        <Col>
                             <h1 className='white display-6 roboto'>New Watches</h1>
                             <h4 className='white condensed slidertext'>Lorem ipsum dolor sit amet consectetur. Molestie eleifend integer tincidunt facilisi mollis dignissim tellus.</h4>
-                            <Button variant='accent condensed'>Shop Now</Button>
-                        {/* </Container> */}
-                    {/* </Row> */}
+                            <Button variant='accent condensed mb-3'>Shop Now</Button>
+                        </Col>
+
+                        <Col>
+                            <img className=' mb-3 me-2' src={watch} />
+                        </Col>
+
+                    </Row>
                 </Container>
             </Carousel.Item>
 
             <Carousel.Item className='backgblue'>
-                <Container className='pt-1'>
+                <Container className='pt-1 mb-3'>
                     <Row>
-                        <Container className='col my-5'>
-                            <h3 className='white'>New Watches</h3>
-                            <h4 className='white my-3'>Shop all new wathces now</h4>
-                            <Button variant='accent'>Shop Now</Button>
-                        </Container>
-                        <img className='col' src={watch} height={"600px"} />
+                        <Col><h1 className='pb-1 accent roboto'>Brand New Old</h1></Col>
+                        <Col xl={12} className='pb-2'><Image fluid src={casio} /></Col>
+                        <Col>
+                            <h3 className='accent condensed pt-2 pb-3'>Shop Retro Watches</h3>
+                        </Col>
                     </Row>
                 </Container>
-                {/* <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption> */}
             </Carousel.Item>
 
             <Carousel.Item className='backgblue'>
-                <Container className='pt-1'>
+                <Container className='mb-5 mt-4'>
                     <Row>
-                        <Container className='col my-5'>
-                            <h3 className='white'>New Watches</h3>
-                            <h4 className='white my-3'>Shop all new wathces now</h4>
-                            <Button variant='accent'>Shop Now</Button>
-                        </Container>
-                        <img className='col' src={watch} height={"600px"} />
+                        <Col xl={5}>
+                            <h1 className='accent roboto'> Shop the Classics </h1>
+                            <h2 className='text-light condensed pb-4 pt-3'>Timeless style </h2>
+                        </Col>
+                        <Col xl={7}>
+                            <Image className='w-100' fluid src={tank} />
+                        </Col>
                     </Row>
+                    {/* <Row>
+                        
+                    </Row> */}
                 </Container>
-                {/* <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                    </p>
-                </Carousel.Caption> */}
             </Carousel.Item>
 
         </Carousel>
