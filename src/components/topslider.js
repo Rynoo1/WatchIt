@@ -29,13 +29,14 @@ export default function TopSlider() {
             </Carousel.Item>
 
             <Carousel.Item className='backgblue'>
-                <Container className='pt-1 mb-3'>
+                <Container className='pt-1 mb-4'>
                     <Row>
                         <Col><h1 className='pb-1 accent roboto'>Brand New Old</h1></Col>
                         <Col xl={12} className='pb-2'><Image fluid src={casio} /></Col>
                         <Col>
                             <h3 className='accent condensed pt-2 pb-3'>Shop Retro Watches</h3>
                         </Col>
+                        <Col><Button variant='accent'>Shop Now</Button></Col>
                     </Row>
                 </Container>
             </Carousel.Item>

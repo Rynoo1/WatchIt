@@ -154,6 +154,11 @@
   margin: 0;
 }
 
+.custom{
+  background-color: #2C3439 !important;
+  color: #FFFF !important;
+}
+
 /* @media (max-width: 60px){
   .slideimage{
     width: auto;

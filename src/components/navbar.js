@@ -17,13 +17,13 @@ export default function NavBar1() {
         <Navbar className='backgblue'>
             <Container>
                 <Nav className='me-auto'>
-                    <NavLink href="/prod" className='linkaccent roboto'>Products</NavLink>
+                    <NavLink href="/allprod" className='linkaccent'><h3 className='roboto'>Products</h3></NavLink>
                 </Nav>
 
-                <NavbarBrand href="/"  className='me-5'> <h1 className='prime roboto display-5'>Watch<span className='accent'>It</span></h1> </NavbarBrand>
+                <NavbarBrand href="/"  className='mx-auto'> <h1 className='prime roboto display-5'>Watch<span className='accent'>It</span></h1> </NavbarBrand>
 
                 <Nav className='ms-auto'>
-                    <NavLink className='linkaccent me-auto roboto' onClick={handleShow}>Cart</NavLink>
+                    <NavLink className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </NavLink>
                 </Nav>
             </Container>
 
@@ -58,10 +58,8 @@ export default function NavBar1() {
                     <Table>
                         <thead>
                             <tr>
-                                <th>Total</th>
-                                <th></th>
-                                <th></th>
-                                <th>Price</th>
+                                <th>Total:</th>
+                                <th className='right'>Price in rand</th>
                             </tr>
                         </thead>
                     </Table>
