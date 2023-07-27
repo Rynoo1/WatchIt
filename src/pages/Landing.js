@@ -4,6 +4,7 @@ import CasioProduct from '../images/casioprod.png';
 import Cartier from '../images/cartiertankmetal.webp';
 import Patek from '../images/patek.webp';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import Footer from '../components/footer';
 
 function Landing() {
     return (
@@ -45,23 +46,25 @@ function Landing() {
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={{span: 3, offset:1}} className='backgblue rounded me-2 mb-1'>
+                        <Col xs={6} sm={{ span: 3, offset: 1 }} className='backgblue rounded me-2 mb-1'>
                             <img className='img-thumbnail' src={Cartier} />
                             <h5 className='condensed text-light mt-2'>Cartier Tank watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={{span: 3, offset:1}} className='backgblue rounded me-2 mb-1'>
+                        <Col xs={6} sm={{ span: 3, offset: 1 }} className='backgblue rounded me-2 mb-1'>
                             <img className='img-thumbnail' src={Patek} />
                             <h5 className='condensed text-light mt-2'>Patek Philippe watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
                     </Row>
-
+                    {/* <Footer /> */}
                 </Container>
+
             </div>
+
         </>
     )
 }

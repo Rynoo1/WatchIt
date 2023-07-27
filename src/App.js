@@ -8,6 +8,7 @@ import Products from './pages/Products';
 import Inventory from './pages/Inventory';
 import OrderProcess from './pages/OrderProcess';
 import CheckOut from './pages/CheckOut';
+import Footer from './components/footer';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/checkout' element={<CheckOut/>}/>
         <Route path='/inventory' element={<Inventory/>}/>
         <Route path='/orders' element={<OrderProcess/>}/>
+        <Route path='/foot' element={<Footer/>}/>
       </Routes>
     </div>
   );

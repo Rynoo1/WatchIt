@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Modal, Button, Image } from 'react-bootstrap'
+import { Table, Modal, Button, Image, Form } from 'react-bootstrap'
 import patek from '../images/patek.webp';
 import casio from '../images/casioprod1.png';
 import cartier from '../images/cartiertankmetal.webp';
@@ -9,7 +9,6 @@ function Inventory() {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log(show);
     return (
         <div>
             <Table variant='dark' >
@@ -50,14 +49,25 @@ function Inventory() {
                 </tbody>
             </Table>
 
-            <Modal onShow={show} onHide={handleClose}>
-                {/* <Modal.Header closeButton>
-                    <Modal.Title>Edit Item</Modal.Title>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Update</Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
-                    Modal Body Modal Body Modal Body
-                </Modal.Body> */}
-                hellow
+                    <Form.Group className='mb-2'>
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control/>
+                    </Form.Group>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button onClick={handleClose}>Save Changes</Button>
+                </Modal.Footer>
             </Modal>
         </div>
     )

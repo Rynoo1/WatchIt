@@ -1,24 +1,37 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function OrderProcess() {
   return (
     <div>
-        <Table variant='custom'>
+        <Table responsive>
             <thead className='roboto'>
-                <tr>
-                    <th>Order Nr</th>
-                    <th>QTY</th>
-                    <th>Customer Name</th>
-                    <th>Total before shipping</th>
+                <tr className=''>
+                    <th className='customhead'>Order Nr</th>
+                    <th className='customhead'>QTY</th>
+                    <th className='customhead'>Customer Name</th>
+                    <th className='customhead'>Date</th>
+                    <th className='customhead'>Total</th>
+                    <th className='customhead'>See more</th>
                 </tr>
             </thead>
-            <tbody className='condensed'>
-                <tr>
-                    <td>#234</td>
-                    <td>2</td>
-                    <td>Jonah</td>
-                    <td>R 3500</td>
+            <tbody className='condensed hover'>
+                <tr className='custom'>
+                    <td className='custom'>#234</td>
+                    <td className='custom'>2</td>
+                    <td className='custom'>Jonah</td>
+                    <td className='custom'>Date</td>
+                    <td className='custom'>R 3500</td>
+                    <td className='custom'> <Link className='linkaccent'>See</Link> </td>
+                </tr>
+                <tr className='custom'>
+                    <td className='custom'>#234</td>
+                    <td className='custom'>2</td>
+                    <td className='custom'>Jonah</td>
+                    <td className='custom'>Date</td>
+                    <td className='custom'>R 3500</td>
+                    <td className='custom'> <Link className='linkaccent'>See</Link> </td>
                 </tr>
             </tbody>
         </Table>

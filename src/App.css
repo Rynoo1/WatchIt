@@ -159,6 +159,19 @@
   color: #FFFF !important;
 }
 
+.customhead{
+  background-color: #2C3439 !important;
+  color: #FF5035 !important;
+  font-size: 25px;
+}
+
+.cartlabel{
+  font-size: 12px;
+  padding: 0 5px;
+  vertical-align: top;
+}
+
+
 /* @media (max-width: 60px){
   .slideimage{
     width: auto;
