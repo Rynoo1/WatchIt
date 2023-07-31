@@ -28,16 +28,17 @@ function IndividProd() {
 
           </Col>
 
-          <Col>
+          <Col className='pt-3'>
             <div className='backgprime pb-4 rounded px-3 pt-2' >
               <h1 className='roboto pt-1 display-5'>Casio - A100WE</h1>
               <h1 className='roboto'>About</h1>
               <p className='condensed mt-3 mb-4 fs-5 text-break'>Indulge your inner gadget geek with this stylish non-gendered timepiece straight from the Casio Vintage collection. The A100 line pays homage to the F‐100, the  first Casio watch built with a resin case.  We’ve kept the iconic layout with four front buttons but introduced metallic components, still vintage-style, for an updated take on a true classic.</p>
               <Row className='justify-content-centre'>
-                <Col xs={2} className='ms-4 roboto'>QTY</Col>
-                <Col xs={3}><Form.Control type='number'></Form.Control></Col>
-                <Col xs={2} className=' roboto'>Style</Col>
-                <Col xs={3}><Form.Control type='number' disabled></Form.Control></Col>
+                <Col xs={6}> <h3 className='roboto'>Price in Rand</h3> </Col>
+                <Col xs={2} className='ms-4 roboto'> <h3 className='roboto'>QTY</h3> </Col>
+                <Col xs={3}> <Form.Control type='number' /> </Col>
+                {/* <Col xs={2} className=' roboto'>Style</Col>
+                <Col xs={3}><Form.Control type='number' disabled></Form.Control></Col> */}
               </Row>
               <Row>
               <Col className='mt-3'>

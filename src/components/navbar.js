@@ -5,26 +5,35 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
-import { Modal, Table, Image } from 'react-bootstrap';
+import { Modal, Table, Image, Row, Col } from 'react-bootstrap';
 import CasioProduct from '../images/casioprod2.png';
 
 export default function NavBar1() {
     const [show, setShow] = useState(false);
-    
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
         <Navbar className='backgblue'>
             <Container>
-                <Nav className='me-auto'>
-                    <NavLink href="/allprod" className='linkaccent'><h3 className='roboto'>Products</h3></NavLink>
-                </Nav>
+                <Row className='w-100'>
+                    <Col xs={3}>                
+                    <Nav className='me-auto'>
+                        <NavLink to="/allprod" className='linkaccent'><h3 className='roboto'>Products</h3></NavLink>
+                    </Nav>
+                    </Col>
 
-                <NavbarBrand href="/"  className='mx-auto'> <h1 className='prime roboto display-5'>Watch<span className='accent'>It</span></h1> </NavbarBrand>
+                    <Col xs={6}>
+                    <NavbarBrand href="/" className='mx-auto'> <h1 className='prime roboto display-5'>Watch<span className='accent'>It</span></h1> </NavbarBrand>
+                    </Col>
 
-                <Nav className='ms-auto'>
-                    <NavLink className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </NavLink>
-                </Nav>
+                    <Col xs={{span:1, offset:2}} >                
+                        <Nav className='ms-auto'>
+                        <NavLink className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </NavLink>
+                    </Nav>
+                    </Col>
+                </Row>
+
             </Container>
 
             <Modal show={show} onHide={handleClose}>

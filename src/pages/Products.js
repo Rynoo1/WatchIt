@@ -8,7 +8,7 @@ function Products() {
         <div className='backgprime px-5'>
             <Row>
                 <Col md={12} lg={2} className='backgblue my-2 rounded'>
-                    <Accordion flush className='my-2'>
+                    <Accordion flush className='my-2 custom'>
                         <Accordion.Item eventKey='0'>
                             <Accordion.Header>Filters</Accordion.Header>
                             <Accordion.Body>
@@ -27,26 +27,35 @@ function Products() {
                 <Col className='blue roboto mx-2'>
                     <h1 className='roboto'>{title}</h1>
                     <Row className='mx-2 my-2'>
-                        <Col className=''>
-                            <Image fluid src={patek} thumbnail />
-                            <h3>Patek - Price</h3>
+                        <Col className='product'>
+                            <Image fluid src={patek} />
+                            <h3 className='backgblue prime rounded-bottom prodtxt'>Patek - Model</h3>
                         </Col>
                         <Col className=''>
                             <Image fluid src={patek} />
-                            <h3 className='backgblue prime rounded-bottom'>Patek - Price</h3>
+                            <h3 className='backgblue prime rounded-bottom'>Patek - Model</h3>
+                            <h5 className='backgblue prime rounded-bottom' >Price</h5>
                         </Col>
                         <Col className=''>
                             <Image fluid src={patek} />
-                            <h3 className='backgblue accent rounded-bottom'>Patek - Price</h3>
+                            <h3 className='backgblue accent rounded-bottom'>Patek - Model</h3>
                         </Col>
                     </Row>
                     <Row className='mx-2'>
-                        <Col className=''>
+                        <Col className='product'>
                             <Image fluid src={patek} />
-                            <h3 className=' accent rounded-bottom'>Patek - Price</h3>
+                            <h3 className='backgblue prime rounded-bottom prodtxt'>Patek - Model</h3>
                         </Col>
-                        <Col className=''>ColOne</Col>
-                        <Col className='backgblue'>ColOne</Col>
+
+                        <Col className='product'>
+                            <Image fluid src={patek} />
+                            <h3 className='backgblue prime rounded-bottom prodtxt'>Patek - Model</h3>
+                        </Col>
+
+                        <Col className='product'>
+                            <Image fluid src={patek} />
+                            <h3 className='backgblue prime rounded-bottom prodtxt'>Patek - Model</h3>
+                        </Col>
                     </Row>
                 </Col>
             </Row>

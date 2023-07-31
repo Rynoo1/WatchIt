@@ -15,21 +15,21 @@ function Landing() {
 
                     <h1 className='roboto'>Newest</h1>
                     <Row className='pb-3 justify-content-center'>
-                        <Col xs={6} sm={3} className='backgblue rounded me-2'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={CasioProduct} />
                             <h5 className='condensed text-light mt-2'>Casio A100WE</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={3} className='backgblue rounded me-2'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Cartier} />
                             <h5 className='condensed text-light mt-2'>Cartier Tank</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={3} className='backgblue rounded me-2'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Patek} />
                             <h5 className='condensed text-light mt-2'>Patek Philippe watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
@@ -39,28 +39,28 @@ function Landing() {
 
                     <h1 className='roboto'>Sale</h1>
                     <Row className='justify-content-center pb-3'>
-                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={CasioProduct} />
                             <h5 className='condensed text-light mt-2'>Casio Retro Vintage watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={{ span: 3, offset: 1 }} className='backgblue rounded me-2 mb-1'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Cartier} />
                             <h5 className='condensed text-light mt-2'>Cartier Tank watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
-                        <Col xs={6} sm={{ span: 3, offset: 1 }} className='backgblue rounded me-2 mb-1'>
+                        <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Patek} />
                             <h5 className='condensed text-light mt-2'>Patek Philippe watch</h5>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
                     </Row>
-                    {/* <Footer /> */}
+                    <Footer />
                 </Container>
 
             </div>
