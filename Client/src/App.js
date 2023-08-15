@@ -9,6 +9,8 @@ import Inventory from './pages/Inventory';
 import OrderProcess from './pages/OrderProcess';
 import CheckOut from './pages/CheckOut';
 import Footer from './components/footer';
+import Login from './components/login';
+import SignUp from './pages/SignUp';
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path='/inventory' element={<Inventory/>}/>
         <Route path='/orders' element={<OrderProcess/>}/>
         <Route path='/foot' element={<Footer/>}/>
+        <Route path='/log' element={<Login/>}/>
+        <Route path='/sign' element={<SignUp/>}/>
       </Routes>
     </div>
   );

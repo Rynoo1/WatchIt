@@ -18,7 +18,7 @@ export default function NavBar1() {
             <Container>
                 <Row className='w-100'>
                     <Col xs={3}>                
-                    <Nav className='me-auto'>
+                    <Nav className='me-auto pt-2'>
                         <NavLink to="/allprod" className='linkaccent'><h3 className='roboto'>Products</h3></NavLink>
                     </Nav>
                     </Col>
@@ -28,7 +28,7 @@ export default function NavBar1() {
                     </Col>
 
                     <Col xs={{span:1, offset:2}} >                
-                        <Nav className='ms-auto'>
+                        <Nav className='ms-auto pt-2'>
                         <NavLink className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </NavLink>
                     </Nav>
                     </Col>
@@ -39,7 +39,7 @@ export default function NavBar1() {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Current Cart</Modal.Title>
-                </Modal.Header>
+                </Modal.Header> 
                 <Modal.Body>
                     <Table>
                         <thead>

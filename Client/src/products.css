@@ -7,3 +7,32 @@
     color: #FF5035 !important;
     background: black !important;
   }
+
+  .no-bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .backgtransparent{
+    background-color: transparent;
+  }
+
+  .products{
+    background-color: transparent;
+  }
+
+  .products:hover{
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #2C3439;
+  }
+
+  .productstxt{
+    background-color: #2C3439;
+    color: #CED9BF;
+  }
+
+  .productstxt:hover{
+    color: #FF5035;
+  }
