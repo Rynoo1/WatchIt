@@ -91,6 +91,32 @@
   box-shadow: 0.25em 0.3em 0.50em rgb(0, 0, 0);
 }
 
+.btn-log{
+  background-color: #FF5035 !important;
+  color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+  border-radius: 0px !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0.04em 0.04em 0.2em #171b1e;
+}
+
+.btn-log:hover{
+  box-shadow: 0.04em 0.04em 0.3em #171b1e;
+}
+
+.btn-sign{
+  /* background-color: #FF5035 !important; */
+  color: #FF5035 !important;
+  font-family: 'Roboto', sans-serif !important;
+  border-radius: 0px !important;
+  border: 2px solid #FF5035 !important;
+  box-shadow: 0.04em 0.04em 0.2em #171b1e;
+}
+
+.btn-sign:hover{
+  box-shadow: 0.04em 0.04em 0.3em #171b1e;
+}
+
 .linkaccent{
   color: #FF5035 !important;
   text-decoration: none !important;

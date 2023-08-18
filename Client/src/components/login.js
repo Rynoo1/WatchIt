@@ -19,7 +19,7 @@ function Login() {
                         <FormControl type="email" />
                     </FormGroup>
                     
-                    <FormGroup>
+                    <FormGroup className='pt-2' >
                         <FormLabel>Password</FormLabel>
                         <FormControl type="password" />
                     </FormGroup>
@@ -29,8 +29,8 @@ function Login() {
             <ModalFooter className='justify-center'>
 
                 <Row className='w-100'>
-                    <Col> <Button> Sign In </Button> </Col>
-                    <Col xs={{offset:6}} > <Button> Sign Up </Button> </Col>
+                    <Col> <Button variant='log' > Log In </Button> </Col>
+                    <Col xs={{offset:6}} > <Button variant='sign' > Sign Up </Button> </Col>
                 </Row>
 
             </ModalFooter>
