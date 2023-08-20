@@ -1,7 +1,9 @@
-const express = require('express')
-const cors = require('cors')
-const mongoose = require('mongoose')
-const watchRoute = require('./routes/watches')
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const watchRoute = require('./routes/watches');
+const userRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
 
 require('dotenv/config')
 
@@ -11,8 +13,12 @@ app.use(cors({
     origin: 'http://localhost3000'
 }));
 
+//middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use(watchRoute)
 

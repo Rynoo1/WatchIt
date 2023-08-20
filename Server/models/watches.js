@@ -24,7 +24,11 @@ const WatchSchema = mongoose.Schema({
     price: {
         type: Number,
         required: false,
+    },
+    stock: {
+        type: Number,
+        required: false,
     }
 })
 
-module.exports = mongoose.model("Watch", WatchSchema)
+module.exports = mongoose.model("cars", WatchSchema)
