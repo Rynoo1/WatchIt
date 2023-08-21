@@ -19,8 +19,8 @@ function App() {
     <div className="App backgblue">
       <NavBar1></NavBar1>
       <Routes>
-        {user && <Route path='/' element = {<Main/>}/>}
-        <Route path='/signup' element = {<SignUp/>} />
+        {/* {user && <Route path='/' element = {<Main/>}/>}
+        <Route path='/signup' element = {<SignUp/>} /> */}
         <Route path='/' element={<Landing/>} />
         <Route path='/prod' element={<IndividProd/>} />
         <Route path='/allprod' element={<Products/>}/>
