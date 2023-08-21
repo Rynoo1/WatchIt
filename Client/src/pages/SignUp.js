@@ -74,7 +74,7 @@ function SignUp() {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        {error && <Alert>{errror}</Alert>}
+                        {/* {error && <Alert>{errror}</Alert>} */}
                         <Button type='submit' variant='accent' className='mt-3' >Submit</Button>
                     </Form>
                 </Container>
