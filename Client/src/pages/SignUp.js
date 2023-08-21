@@ -67,6 +67,23 @@
 //                                 </FormGroup>
 //                             </Col>
 
+<<<<<<< HEAD
+                            <Col>
+                                <FormGroup className='pt-2'>
+                                    <FormLabel className='accent h4'> Password </FormLabel>
+                                    <FormControl name='Password' value={data.password} required onChange={handleChange} type='password' placeholder='Password' />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        {/* {error && <Alert>{errror}</Alert>} */}
+                        <Button type='submit' variant='accent' className='mt-3' >Submit</Button>
+                    </Form>
+                </Container>
+            </div>
+        </div>
+    )
+}
+=======
 //                             <Col>
 //                                 <FormGroup className='pt-2'>
 //                                     <FormLabel className='accent h4'> Password </FormLabel>
@@ -82,5 +99,6 @@
 //         </div>
 //     )
 // }
+>>>>>>> main
 
 // export default SignUp
