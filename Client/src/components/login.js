@@ -14,7 +14,7 @@ function Login() {
         password: ""
     })
 
-    const [errror, setErrror] = useState("");
+    const [error, setError] = useState("");
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -34,7 +34,7 @@ function Login() {
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-                setErrror(error.response.data.message)
+                setError(error.response.data.message)
             }
 
         }

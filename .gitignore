@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 Client/node_modules/
 Client/node_modules/.cache/
+Server/node_modules

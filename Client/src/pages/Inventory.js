@@ -6,6 +6,7 @@ import cartier from '../images/cartiertankmetal.webp';
 import productcard from '../components/productcard';
 import Axios from 'axios';
 import Footer from '../components/footer';
+import axios from 'axios';
 
 function Inventory() {
     const [show, setShow] = useState(false);
@@ -15,7 +16,6 @@ function Inventory() {
 
     const [watches, setWatches] = useState();
     const [updateWatches, setUpdateWatches] = useState(false);
-
 
 
     const [brand, setBrand] = useState();
@@ -29,53 +29,23 @@ function Inventory() {
 
     useEffect(() => {
         Axios.get('http://localhost:5002/api/getwatches')
-        .then(res => {
-            let watchData = res.data;
+        .then(result => {
+            let watchData = result.data;
             console.log(watchData);
-            let renderWatches = watchData.map((item) => <productcard key={item._id} brand={item.brand} price={item.price} />)
+            let renderWatches = watchData.map((item) => <productcard key={item._id} brand={item.brand} price={item.price} />);
             setWatches(renderWatches);
             setUpdateWatches(false);
         })
         .catch(err => console.log(err));
 
     }, [updateWatches])
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:5002/api/getwatches')
+    //     .then (result => setWatches(result.data) )
+    //     .catch (err => console.log(err))
+    // }, [updateWatches])
     
-
-
-    const getBrand = (e) => {
-        let value = e.target.value;
-        setBrand(value);
-    };
-
-    const getModel = (e) => {
-        let value = e.target.value;
-        setModel(value);
-    };
-
-    const getStrap = (e) => {
-        let value = e.target.value;
-        setStrap(value);
-    };
-
-    const getSize = (e) => {
-        let value = e.target.value;
-        setSize(value);
-    };
-
-    const getPrice = (e) => {
-        let value = e.target.value;
-        setPrice(value);
-    };
-
-    const getStock = (e) => {
-        let value = e.target.value;
-        setStock(value);
-    };
-
-    const getYear = (e) => {
-        let value = e.target.value;
-        setYear(value);
-    };
 
     const addWatch = (e) => {
         let details = {
@@ -90,13 +60,13 @@ function Inventory() {
 
         Axios.post('http://localhost:5002/api/addwatch', details);
         setUpdateWatches(true);
-        document.getElementById("brandIn").value = "";
-        document.getElementById("modelIn").value = "";
-        document.getElementById("yearIn").value = "";
-        document.getElementById("strapIn").value = "";
-        document.getElementById("sizeIn").value = "";
-        document.getElementById("stockIn").value = "";
-        document.getElementById("priceIn").value = "";
+        // document.getElementById("brandIn").value = "";
+        // document.getElementById("modelIn").value = "";
+        // document.getElementById("yearIn").value = "";
+        // document.getElementById("strapIn").value = "";
+        // document.getElementById("sizeIn").value = "";
+        // document.getElementById("stockIn").value = "";
+        // document.getElementById("priceIn").value = "";
 
     }
 
@@ -192,14 +162,14 @@ function Inventory() {
                                 <Col className="mb-3 ms-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Brand </FormLabel>
-                                        <FormControl id='brandIn' onChange={getBrand} type='string' />
+                                        <FormControl id='brandIn' onChange={(e) => setBrand(e.target.value)} type='string' />
                                     </FormGroup>
                                 </Col>
 
                                 <Col className="mb-3 me-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Model </FormLabel>
-                                        <FormControl id='modelIn' onChange={getModel} type='string' />
+                                        <FormControl id='modelIn' onChange={(e) => setModel(e.target.value)} type='string' />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -209,14 +179,14 @@ function Inventory() {
                                 <Col className="mb-3 ms-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Strap </FormLabel>
-                                        <FormControl id='strapIn' onChange={getStrap} type='string' />
+                                        <FormControl id='strapIn' onChange={(e) => setStrap(e.target.value)} type='string' />
                                     </FormGroup>
                                 </Col>
 
                                 <Col className="mb-3 me-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Size </FormLabel>
-                                        <FormControl id='sizeIn' onChange={getSize} type='number' />
+                                        <FormControl id='sizeIn' onChange={(e) => setSize(e.target.value)} type='number' />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -226,14 +196,14 @@ function Inventory() {
                                 <Col className="mb-3 ms-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Price </FormLabel>
-                                        <FormControl id='priceIn' onChange={getPrice} type='number' />
+                                        <FormControl id='priceIn' onChange={(e) => setPrice(e.target.value)} type='number' />
                                     </FormGroup>
                                 </Col>
 
                                 <Col className="mb-3 me-auto">
                                     <FormGroup className='pt-2'>
                                         <FormLabel className=' h4'> Stock </FormLabel>
-                                        <FormControl id='stockIn' onChange={getStock} type='number' />
+                                        <FormControl id='stockIn' onChange={(e) => setStock(e.target.value)} type='number' />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -243,7 +213,7 @@ function Inventory() {
                             <Col className="mb-3 ms-auto">
                                 <FormGroup className='pt-2'>
                                     <FormLabel className=' h4'> Year </FormLabel>
-                                    <FormControl id='yearIn' onChange={getYear} type='number' />
+                                    <FormControl id='yearIn' onChange={(e) => setYear(e.target.value)} type='number' />
                                 </FormGroup>
                             </Col>
                             {/* </Row> */}
