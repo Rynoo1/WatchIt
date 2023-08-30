@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Container, Form, FormControl, FormGroup, FormLabel, Button, Col, Row, Alert } from 'react-bootstrap'
-import axios from 'axios'
+import Axios from 'axios'
 
 function SignUp() {
 
     const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         email: "",
         password: ""
     })
@@ -22,8 +22,9 @@ function SignUp() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-            const url = 'http://localhost:5002/api/users'
-            const {data: res} = await axios.post(url, data);
+            const url = 'http://localhost:5002/api/users';
+            console.log(data);
+            const {data: res} = await Axios.post(url, data);
             navigate("/login")
             console.log(res.message);
         } catch (error) {
@@ -47,14 +48,14 @@ function SignUp() {
                             <Col>
                                 <FormGroup className='pt-2'>
                                     <FormLabel className='accent h4'> Name </FormLabel>
-                                    <FormControl name='firstName' value={data.firstName} required onChange={handleChange} type='text' placeholder='Name' />
+                                    <FormControl name='firstname' value={data.firstname} required onChange={handleChange} type='text' placeholder='Name' />
                                 </FormGroup>
                             </Col>
 
                             <Col>
                                 <FormGroup className='pt-2'>
                                     <FormLabel className='accent h4'> Surname </FormLabel>
-                                    <FormControl name='lastName' value={data.lastName} required onChange={handleChange} type='text' placeholder='example@email.com' />
+                                    <FormControl name='lastname' value={data.lastname} required onChange={handleChange} type='text' placeholder='example@email.com' />
                                 </FormGroup>
                             </Col>
                         </Row>
@@ -70,11 +71,11 @@ function SignUp() {
                             <Col>
                                 <FormGroup className='pt-2'>
                                     <FormLabel className='accent h4'> Password </FormLabel>
-                                    <FormControl name='Password' value={data.password} required onChange={handleChange} type='password' placeholder='Password' />
+                                    <FormControl name='password' value={data.password} required onChange={handleChange} type='password' placeholder='Password' />
                                 </FormGroup>
                             </Col>
                         </Row>
-                        {/* {error && <Alert>{errror}</Alert>} */}
+                        {errror && <Alert>{errror}</Alert>}
                         <Button type='submit' variant='accent' className='mt-3' >Submit</Button>
                     </Form>
                 </Container>

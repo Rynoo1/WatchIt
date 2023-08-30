@@ -1,18 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap'
 import casio from '../images/casioprod1.png';
 import casioback from '../images/casioprod2.png';
+import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function IndividProd() {
 
   const [image, setImage] = useState(casio);
+  const [product, setProduct] = useState([]);
 
   const changeImage1 = () => {
     setImage(casio);
-  }
+  };
   const changeImage2 = () => {
     setImage(casioback);
-  }
+  };
+
+  useEffect(() => {
+    Axios.get('http://localhost:5002/api/watch/64d0dca866acb4d0855175d5')
+      .then(result => {
+        setProduct(result.data);
+        console.log(product);
+        console.log(product[1].image)
+        // let renderWatches = watchData.map((temp) => <ProductCard key={temp._id} id={temp._id} brand={temp.brand} price={temp.price} model={temp.model} stock={temp.stock} strap={temp.strap} size={temp.size} year={temp.year} image={temp.image} />);
+        // setWatches(renderWatches);
+        // console.log(watches);
+        // setUpdateWatches(false);
+      })
+      .catch(err => console.log(err));
+
+  }, [])
+
+  // const imgsrc = '"../images/' + product.image + '"';
 
   return (
     <div className='blue'>
@@ -30,20 +50,20 @@ function IndividProd() {
 
           <Col className='pt-3'>
             <div className='backgprime pb-4 rounded px-3 pt-2' >
-              <h1 className='roboto pt-1 display-5'>Casio - A100WE</h1>
-              <h1 className='roboto'>About</h1>
-              <p className='condensed mt-3 mb-4 fs-5 text-break'>Indulge your inner gadget geek with this stylish non-gendered timepiece straight from the Casio Vintage collection. The A100 line pays homage to the F‐100, the  first Casio watch built with a resin case.  We’ve kept the iconic layout with four front buttons but introduced metallic components, still vintage-style, for an updated take on a true classic.</p>
+              <h1 className='roboto pt-1 display-5'>{product.brand} {product.model} </h1>
+              <h1 className='roboto'> About </h1>
+              <p className='condensed mt-3 mb-4 fs-5 text-break'> {product.description} </p>
               <Row className='justify-content-centre'>
-                <Col xs={6}> <h3 className='roboto'>Price in Rand</h3> </Col>
-                <Col xs={2} className='ms-4 roboto'> <h3 className='roboto'>QTY</h3> </Col>
+                <Col xs={6}> <h3 className='roboto'> R {product.price} </h3> </Col>
+                <Col xs={2} className='ms-4 roboto'> <h3 className='roboto'>  QTY </h3> </Col>
                 <Col xs={3}> <Form.Control type='number' /> </Col>
                 {/* <Col xs={2} className=' roboto'>Style</Col>
                 <Col xs={3}><Form.Control type='number' disabled></Form.Control></Col> */}
               </Row>
               <Row>
-              <Col className='mt-3'>
+                <Col className='mt-3'>
                   <Button variant='add'>Add to cart</Button>
-                </Col> 
+                </Col>
               </Row>
 
             </div>

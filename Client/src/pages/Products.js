@@ -1,14 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Accordion, Container, Image, Button, Form } from 'react-bootstrap'
-import patek from '../images/patek.webp';
-import '../products.css';
+import patek from '../images/patek.webp'
+import AllProdCard from '../components/allprodcard'
+import Axios from 'axios'
+import '../products.css'
 
 function Products() {
     const [title, setTitle] = useState('All');
+    const [allProd, setAllProd] = useState();
+    // const [reRender, setReRender] = useState(false)
+    // const [updateWatches, setUpdateWatches] = useState(true)
+
+    useEffect(() => {
+        Axios.get('http://localhost:5002/api/getwatches')
+            .then(result => {
+                let data = result.data;
+                console.log(data);
+                console.log(data[1].image);
+                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} brand={temp.brand} price={temp.price} model={temp.model} image={temp.image} />);
+                setAllProd(renderProducts);
+                // console.log(allProd);
+                // setUpdateWatches(false);
+            })
+            .catch(err => console.log(err));
+
+    }, [])
+
     return (
         <div className='backgprime px-5'>
             <Row>
                 <Col md={12} lg={2} className='backgblue my-2 rounded'>
+                    <h1 className='roboto prime'>Filters</h1>
                     <Accordion flush className='my-2 custom-accordion'>
                         <Accordion.Item eventKey='0' className='custom-accordion'>
                             <Accordion.Header className='header'>Filters</Accordion.Header>
@@ -27,75 +49,8 @@ function Products() {
                 </Col>
                 <Col className='blue roboto mx-2'>
                     <h1 className='roboto'>{title}</h1>
-                    <Row className='mx-2 my-2'>
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto" }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
-
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto" }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
-
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto" }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
-
-                    </Row>
-
-                    <Row className='mx-2'>
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto", offset:3 }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
-
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto" }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
-
-                        <Col className='products'>
-                            <Image className='pt-2' fluid src={patek} />
-                            <Col className='rounded-bottom productstxt pb-2'>
-                                <h3 className='pt-2' >Patek - Model</h3>
-                                <Row>
-                                    <Col xs={{ span: "auto", offset: 3 }} ><h3>R10,000</h3></Col>
-                                    <Col xs={{ span: "auto" }} > <Button variant='add' >ADD</Button> </Col>
-                                </Row>
-                            </Col>
-                        </Col>
+                    <Row>
+                        {allProd}
                     </Row>
                 </Col>
             </Row>

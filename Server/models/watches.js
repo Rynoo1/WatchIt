@@ -28,6 +28,14 @@ const WatchSchema = mongoose.Schema({
     stock: {
         type: Number,
         required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    image: {
+        type: String,
+        required: false,
     }
 })
 

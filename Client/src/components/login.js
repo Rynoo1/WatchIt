@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalFooter } from 'react-bootstrap'
+import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalFooter, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -12,13 +12,13 @@ function Login() {
     const [data, setData] = useState({
         email: "",
         password: ""
-    })
+    });
 
-    const [error, setError] = useState("");
+    const [errror, setErrror] = useState("");
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
-    }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ function Login() {
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-                setError(error.response.data.message)
+                setErrror(error.response.data.message)
             }
 
         }
@@ -56,6 +56,8 @@ function Login() {
                             <FormLabel>Password</FormLabel>
                             <FormControl name='password' value={data.password} required onChange={handleChange} type="password" />
                         </FormGroup>
+                        {errror && <Alert>{errror}</Alert>}
+                        <Col> <Button type='submit' variant='log' > Log In </Button> </Col>
                     </Form>
                 </ModalBody>
 

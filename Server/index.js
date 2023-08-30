@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const multer = require('multer');
 const watchRoute = require('./routes/watches');
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
@@ -23,6 +24,7 @@ app.use(cors({
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(multer)
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);

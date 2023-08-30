@@ -16,6 +16,22 @@ router.get('/api/watch/:id', async(req, res) => {
     res.json(findWatch)
 })
 
+//filter straps
+router.get('/api/strapwatches/:strap', async(req, res) => {
+    const findStraps = await WatchSchema.find()
+    .where("strap")
+    .in(req.params.strap)
+    res.json(findStraps)
+})
+
+//filter brands
+router.get('/api/brandwatches/:brand', async(req, res) => {
+    const findBrands = await WatchSchema.find()
+    .where("brand")
+    .in(req.params.brand)
+    res.json(findBrands)
+})
+
 //add watches
 router.post('/api/addwatch', async(req, res) => {
     const watch = new WatchSchema({ ...req.body})
