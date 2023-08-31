@@ -5,8 +5,9 @@ import casioback from '../images/casioprod2.png';
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function IndividProd() {
-
+function IndividProd(props) {
+  const myData = sessionStorage.getItem('productId');
+  console.log("Productid "+myData);
   const [image, setImage] = useState(casio);
   const [product, setProduct] = useState([]);
 
@@ -18,7 +19,7 @@ function IndividProd() {
   };
 
   useEffect(() => {
-    Axios.get('http://localhost:5002/api/watch/64d0dca866acb4d0855175d5')
+    Axios.get('http://localhost:5002/api/watch/'+myData)
       .then(result => {
         setProduct(result.data);
         console.log(product);

@@ -55,7 +55,7 @@ function SignUp() {
                             <Col>
                                 <FormGroup className='pt-2'>
                                     <FormLabel className='accent h4'> Surname </FormLabel>
-                                    <FormControl name='lastname' value={data.lastname} required onChange={handleChange} type='text' placeholder='example@email.com' />
+                                    <FormControl name='lastname' value={data.lastname} required onChange={handleChange} type='text' placeholder='Surname' />
                                 </FormGroup>
                             </Col>
                         </Row>

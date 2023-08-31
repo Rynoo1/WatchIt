@@ -17,7 +17,7 @@ function Products() {
                 let data = result.data;
                 console.log(data);
                 console.log(data[1].image);
-                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} brand={temp.brand} price={temp.price} model={temp.model} image={temp.image} />);
+                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} id={temp._id} brand={temp.brand} price={temp.price} model={temp.model} image={temp.image} />);
                 setAllProd(renderProducts);
                 // console.log(allProd);
                 // setUpdateWatches(false);

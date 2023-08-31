@@ -38,6 +38,11 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         }
 
         Axios.put('http://localhost:5002/api/watch/' + id2, details);
+        const formdata = new FormData ()
+        formdata.append('file', uImage)
+        Axios.post('http://localhost:5002/upload', formdata)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     };
 
     let imgsrc = '"../images/' + image + '"';
@@ -94,7 +99,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
                                 <td> <Form.Control onChange={(e) => setUPrice(e.target.value)} placeholder={price} /> </td>
                                 <td> <Form.Control onChange={(e) => setUStock(e.target.value)} placeholder={stock} /> </td>
                                 <td> <Form.Control onChange={(e) => setUYear(e.target.value)} placeholder={year} /> </td>
-                                <td> <Form.Control onChange={(e) => setUImage(e.target.value)} type="file" /> </td>
+                                <td> <Form.Control onChange={(e) => setUImage(e.target.value)} placeholder={image} type="file" /> </td>
                             </tr>
                         </tbody>
                     </Table>

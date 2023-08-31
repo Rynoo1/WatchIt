@@ -24,6 +24,7 @@ function Inventory() {
     const [pPrice, setPPrice] = useState();
     const [pStock, setPStock] = useState();
     const [pYear, setPYear] = useState();
+    const [pImage, setPImage] = useState();
 
 
     useEffect(() => {
@@ -56,7 +57,8 @@ function Inventory() {
             strap: pStrap,
             size: pSize,
             stock: pStock,
-            price: pPrice
+            price: pPrice,
+            image: pImage
         }
 
         Axios.post('http://localhost:5002/api/addwatch', details);
@@ -104,14 +106,14 @@ function Inventory() {
 
                 <Modal.Body>
                     <Table>
-                        <thead>
+                        {/* <thead>
                             <tr>
                                 <th>Brand</th>
                                 <th>Model</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                             </tr>
-                        </thead>
+                        </thead> */}
                         <tbody>
                             <tr>
                                 <td> <Form.Control placeholder='Casio' /> </td>
@@ -193,6 +195,13 @@ function Inventory() {
                                     <FormLabel className=' h4'> Year </FormLabel>
                                     <FormControl id='yearIn' onChange={(e) => setPYear(e.target.value)} type='number' />
                                 </FormGroup>
+
+                                <Col className="mb-3 me-auto">
+                                    <FormGroup className='pt-2'>
+                                        <FormLabel className=' h4'> Image </FormLabel>
+                                        <FormControl id='imageIn' onChange={(e) => setPImage(e.target.value)} type='file' />
+                                    </FormGroup>
+                                </Col>
                             </Col>
                             {/* </Row> */}
                             {/* Input */}
