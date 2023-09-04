@@ -60,9 +60,9 @@ function Landing() {
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
                     </Row>
-                    <Footer />
-                </Container>
 
+                </Container>
+                <Footer />
             </div>
 
         </>

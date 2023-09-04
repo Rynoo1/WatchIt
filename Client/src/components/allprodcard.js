@@ -11,13 +11,12 @@ function AllProdCard(props) {
         // Set data in sessionStorage
         sessionStorage.setItem('productId', props.id);
         // Navigate to the target page
-        // history.push('/prod');
         window.location = '/prod';
       };
     
     return (
         <Col xs={12} md={4}>
-            <Image className='pt-2' fluid src={props.image} />
+            <Image className='pt-2' fluid src={'http://localhost:5002/images/' + props.image} />
             <Col className='rounded-bottom productstxt pb-2'>
                 <h3 className='pt-2' > {props.brand} - {props.model} </h3>
                 <Row>

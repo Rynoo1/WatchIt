@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
-import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalFooter, Alert } from 'react-bootstrap'
+import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalFooter, Alert, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function Login() {
-    const [show, setShow] = useState(false);
+function Login(props) {
+    const [show, setShow] = useState(props.show);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleShow = () => setShow(true);
 
     const [data, setData] = useState({
         email: "",
         password: ""
     });
+
+    const signIn = (e) => {
+        window.location = "/signup"
+    };
 
     const [errror, setErrror] = useState("");
 
@@ -27,7 +31,7 @@ function Login() {
             const { data: res } = await axios.post(url, data);
             localStorage.setItem("token", res.data);
             window.location = "/";
-            
+
             console.log(res.message);
         } catch (error) {
             if (error.response &&
@@ -36,44 +40,37 @@ function Login() {
             ) {
                 setErrror(error.response.data.message)
             }
-
         }
     }
     return (
         <div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton >
-                    <Modal.Title>Log in</Modal.Title>
+                    <Modal.Title className='roboto'>Log in</Modal.Title>
                 </Modal.Header>
                 <ModalBody>
                     <Form onSubmit={handleSubmit}>
                         <FormGroup>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel className='roboto'>Email</FormLabel>
                             <FormControl name='email' value={data.email} required onChange={handleChange} type="email" />
                         </FormGroup>
 
                         <FormGroup className='pt-2' >
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel className='roboto'>Password</FormLabel>
                             <FormControl name='password' value={data.password} required onChange={handleChange} type="password" />
                         </FormGroup>
-                        {errror && <Alert>{errror}</Alert>}
-                        <Col> <Button type='submit' variant='log' > Log In </Button> </Col>
+                        {errror && <Alert className='mt-3'>{errror}</Alert>}
+                        <Row>
+                            <Col xs={3} className='mt-3'> <Button type='submit' variant='log' > Log In </Button> </Col>
+                            <Col xs={{span:3, offset: 6}} className='mt-3'> <Button onClick={signIn} type='submit' variant='sign' > Sign Up </Button> </Col>
+                        </Row>
                     </Form>
                 </ModalBody>
 
-                <ModalFooter className='justify-center'>
-
-                    <Row className='w-100'>
-                        <Col> <Button type='submit' variant='log' > Log In </Button> </Col>
-                    </Row>
-
-                </ModalFooter>
-
             </Modal>
 
-            <Button onClick={handleShow} >Submit</Button>
+            {/* <Button onClick={handleShow} >Submit</Button> */}
         </div>
-
     )
 }
 

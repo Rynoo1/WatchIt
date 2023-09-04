@@ -19,17 +19,17 @@ function App() {
     <div className="App backgblue">
       <NavBar1></NavBar1>
       <Routes>
-        {/* {user && <Route path='/' element = {<Main/>}/>}
-        <Route path='/signup' element = {<SignUp/>} /> */}
+        {/* {user && <Route path='/' element = {<Landing/>}/>} */}
+        <Route path='/signup' element = {<SignUp/>} />
         <Route path='/' element={<Landing/>} />
         <Route path='/prod' element={<IndividProd/>} />
         <Route path='/allprod' element={<Products/>}/>
-        <Route path='/checkout' element={<CheckOut/>}/>
+        {user && <Route path='/checkout' element={<CheckOut/>}/>}
         <Route path='/inventory' element={<Inventory/>}/>
         <Route path='/orders' element={<OrderProcess/>}/>
         <Route path='/foot' element={<Footer/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/sign' element={<SignUp/>}/>
+        {/* <Route path='/sign' element={<SignUp/>}/> */}
       </Routes>
     </div>
   );
