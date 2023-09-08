@@ -5,6 +5,7 @@ const multer = require('multer');
 const watchRoute = require('./routes/watches');
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
+const orderRoutes = require('./routes/orders');
 const { path } = require('path');
 
 require('dotenv/config')
@@ -30,7 +31,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
-
+app.use(orderRoutes);
 app.use(watchRoute)
 
 mongoose.connect(process.env.DB_CONNECTION, {
@@ -45,20 +46,3 @@ mongoose.connect(process.env.DB_CONNECTION, {
 const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, () => {console.log(`Server has started at port: ${PORT}`)});
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, './images')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
-//     }
-// })
-
-// const upload = multer({
-//     storage: storage
-// })
-
-// app.post('/upload', upload.single('file'), (req, res) => {
-//     console.log(req.file);
-// })

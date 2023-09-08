@@ -1,22 +1,30 @@
 const mongoose = require('mongoose')
 
 const OrderSchema = mongoose.Schema({
-    UserName: {
+    name: {
         type: String,
         required: true
     },
-    UserLastName: {
+    address: {
         type: String,
-        required: true,
+        required: true
     },
-    // Watches: {
-    //     models: {},
-    //     quantity: {}
+    email: {
+        type: String,
+        required: true
+    },
+    // Cart: {
+    //     models: { type: Array, required: true },
+    //     quantity: { type: Array, of: Number, required: true }
 
     // },
-    Total: {
+    cart: {
         type: String,
-        required: true,
+        required: true
+    },
+    total: {
+        type: Number,
+        required: true
     }
 })
 

@@ -3,7 +3,7 @@ import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap'
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Footer from '../components/footer';
-import Login from '../components/login';
+// import Login from '../components/login';
 
 function IndividProd() {
   const myData = sessionStorage.getItem('productId');
@@ -34,20 +34,29 @@ function IndividProd() {
 
   }, []);
 
-  useEffect(() => {
-    try {
-      console.log(quan);
-      // setCart([JSON.parse(sessionStorage.getItem('Cart'))]);
-      setUpCart([cart]);
-      console.log(upCart)
-      setCount(count+1);
-      setUpCart([...upCart, { key: count, id: myData, brand: product.brand, model: product.model, image: product.image,price: product.price , quantity: quan}]);
-      sessionStorage.setItem('Cart', JSON.stringify(upCart));
-      // sessionStorage.setItem('Cart', '');
-    } catch (error) {
-      setShowLog(true);
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   try {
+  //     console.log(quan);
+  //     // setCart([JSON.parse(sessionStorage.getItem('Cart'))]);
+  //     setUpCart([cart]);
+  //     console.log(upCart)
+  //     setCount(count+1);
+  //     //setUpCart([...upCart, { key: count, id: myData, brand: product.brand, model: product.model, image: product.image,price: product.price , quantity: quan}]);
+  //     sessionStorage.setItem('Cart', JSON.stringify(upCart));
+  //     // sessionStorage.setItem('Cart', '');
+  //   } catch (error) {
+  //     setShowLog(true);
+  //   }
+  // }, [cart]);
+
+  const handleAddCart = (key, brand, model, price, image, quantity) => {
+    const newItem = { key: key, brand: brand, model: model, image: image,price: price , quantity: quantity}
+    const existingCart = JSON.parse(sessionStorage.getItem('Cart')) || [];
+    const updatedCart = [...existingCart, newItem];
+    setCart(updatedCart);
+    sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
+    console.log(sessionStorage.getItem('Cart'));
+  };
 
   return (
     <div className='blue'>
@@ -76,7 +85,7 @@ function IndividProd() {
               </Row>
               <Row>
                 <Col className='mt-3'>
-                  <Button variant='add' onClick={(e) => setCart([JSON.parse(sessionStorage.getItem('Cart'))])} >Add to cart</Button>
+                  <Button variant='add' onClick={() => handleAddCart(product._id, product.brand, product.model, product.price, product.image, quan)} >Add to cart</Button>
                 </Col>
               </Row>
 
@@ -84,7 +93,7 @@ function IndividProd() {
           </Col>
         </Row>
       </Container>
-      <Login show={showLog} />
+      {/* <Login show={showLog} /> */}
       <Footer/>
     </div>
   )

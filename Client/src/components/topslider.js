@@ -8,6 +8,10 @@ import { Row, Col, Image } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 export default function TopSlider() {
+    const handleClick = () => {
+        window.location='/allprod';
+    };
+
     return (
 
         <Carousel interval={null}>
@@ -17,7 +21,7 @@ export default function TopSlider() {
                         <Col>
                             <h1 className='white display-6 roboto'>New Watches</h1>
                             <h4 className='white condensed slidertext'>Lorem ipsum dolor sit amet consectetur. Molestie eleifend integer tincidunt facilisi mollis dignissim tellus.</h4>
-                            <Button variant='accent condensed mb-3'>Shop Now</Button>
+                            <Button onClick={handleClick} variant='accent condensed mb-3'> Shop Now </Button>
                         </Col>
 
                         <Col>
@@ -36,7 +40,7 @@ export default function TopSlider() {
                         <Col>
                             <h3 className='accent condensed pt-2 pb-3'>Shop Retro Watches</h3>
                         </Col>
-                        <Col><Button variant='accent'>Shop Now</Button></Col>
+                        <Col><Button onClick={handleClick} variant='accent'>Shop Now</Button></Col>
                     </Row>
                 </Container>
             </Carousel.Item>

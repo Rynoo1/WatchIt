@@ -41,6 +41,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         console.log('deleted watch');
         setShowSuc(true);
     };
+    
 
     const getImage = (e) => {
         

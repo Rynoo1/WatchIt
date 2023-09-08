@@ -1,60 +1,192 @@
-import React from 'react';
-import { Container, Row, Col, Form, Table, Image } from 'react-bootstrap';
-import CasioProduct from '../images/casioprod1.png';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Form, Table, Image, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap";
+// import CasioProduct from "../images/casioprod1.png";
+// import Cart from "../components/cart";
+import Axios from "axios";
 
 function CheckOut() {
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState();
+  const [name, setName] = useState();
+  const [address, setAddress] = useState();
+  const [email, setEmail] = useState();
+  let count = 0;
+  let data = '';
+
+  const [showSuc, setShowSuc] = useState(false);
+  const CloseSuc = () => {
+    setShowSuc(false);
+    window.location = '/';
+  }
+
+  const handleOrder = (e) => {
+    while (count < cart.length) {
+        data = data + cart[count].brand + ' ' + cart[count].model + ' - ' + cart[count].quantity + ', ';
+        count++;
+    };
+    let details = {
+        name: name,
+        address: address,
+        email: email,
+        cart: data,
+        total: total
+    };
+    Axios.post('http://localhost:5002/api/addorders', details)
+    // .then( window.location = '/');
+    console.log(data);
+    console.log(cart);
+    sessionStorage.setItem('Cart', JSON.stringify([]));
+    setShowSuc(true);
+  }
+
+useEffect(() => {
+    try {
+      const cartData = JSON.parse(sessionStorage.getItem('Cart')) || [];
+      setCart(cartData);
+
+      // Calculate the total price of items in the cart
+      const cartTotal = cartData.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      setTotal(cartTotal);
+    } catch (error) {
+      console.log('cart empty');
+    }
+  }, []);
+
+  const removeFromCart = (itemKey) => {
+    const updatedCart = cart.filter((item) => item.key !== itemKey);
+    setCart(updatedCart);
+
+    // Calculate the new total
+    const newTotal = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotal(newTotal);
+
+    // Update sessionStorage with the updated cart
+    sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
+  };
+
   return (
     <div>
-         <Container>
-            <Row>
-                <Col className='backgaccent me-2'>
-                    <h3 className='roboto'>Personal Information</h3>
-                    <Form>
-                        <Form.Group as={Row} className='mb-2'>
-                            <Form.Label column xl={{span:2, offset:1}} className='roboto'>Field 1</Form.Label>
-                            <Col xl={5}><Form.Control/></Col> 
-                        </Form.Group>
-                        <Form.Group as={Row} className='mb-2'>
-                            <Form.Label column xl={{span:2, offset:1}} className='roboto'>Field 2</Form.Label>
-                            <Col xl={5}><Form.Control/></Col> 
-                        </Form.Group>
-                        <Form.Group as={Row} className='mb-2'>
-                            <Form.Label column xl={{span:2, offset:1}} className='roboto'>Field 3</Form.Label>
-                            <Col xl={5}><Form.Control/></Col> 
-                        </Form.Group>
-                    </Form>
+      <Container>
+        <Row>
+          <Col className="backgaccent me-2">
+            <h3 className="roboto mt-2"> Personal Information </h3>
+            <Form className="mt-4">
+              <Form.Group as={Row} className="mb-2">
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="roboto white"> Full Name </Form.Label>
+                <Col xl={5}>
+                  <Form.Control onChange={(e) => setName(e.target.value)} id="nameIn" />
                 </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-2">
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="roboto white"> Email </Form.Label>
+                <Col xl={5}>
+                  <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" id="emailIn" />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-2">
+                <Form.Label  column  xl={{ span: 3, offset: 1 }}  className="roboto white"> Address </Form.Label>
+                <Col xl={5}>
+                  <Form.Control onChange={(e) => setAddress(e.target.value)} id="addressIn" />
+                </Col>
+              </Form.Group>
+            </Form>
+          </Col>
 
-                <Col className='backgprime'>
-                    <h3 className='roboto'>Cart</h3>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> <Image fluid src={CasioProduct} /> </td>
-                                <td>Casio A100</td>
-                                <td>1</td>
-                                <td>Price</td>
-                                <td>remove</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-            <Row className='backgprime mt-3 mx-3'>
-                <h3 className='roboto'>Payment information</h3>
-            </Row>
-         </Container>
+          <Col className="backgprime">
+            <h3 className="roboto mt-2">Cart</h3>
+            <Table>
+              <thead>
+                <tr>
+                  <th> Image </th>
+                  <th> Name </th>
+                  <th> Quantity </th>
+                  <th> Total..... </th>
+                  <th> Remove </th>
+                </tr>
+              </thead>
+                <tbody>
+                  {cart.map((item) => (
+                    <tr key={item.key}>
+                        <td> <Image fluid src={"http://localhost:5002/images/" + item.image} /> </td>
+                        <td> {item.brand} {item.model} </td>
+                        <td> {item.quantity} </td>
+                        <td> R {item.price * item.quantity}</td>
+                        <td>
+                            <Button variant="add" onClick={() => removeFromCart(item.key)}> Remove </Button>
+                        </td>
+                    </tr>              
+                  ))}
+                {/* <thead>
+                    {/* <th></th> */}
+                    {/* <th></th>
+                    <th></th>
+                    <th>Total</th>
+                    <th> R {total} </th>
+                </thead>           */}
+                </tbody>
+
+              {/* </tbody> */}
+            </Table>
+          </Col>
+        </Row>
+        <Row className="backgprime mt-3 mx-3">
+          <h3 className="roboto mt-2">Payment information</h3>
+          <Row>
+            <Col>
+            <Form className="mt-4">
+                <Row>
+                    <Col xl={{ span: 4, offset: 2 }}>
+                        <Form.Group className="mb-2">
+                            <Form.Label className="roboto"> Name on Card </Form.Label>
+                            <Form.Control id="cardNameIn" />
+                        </Form.Group>
+                    </Col>
+
+                    <Col xl={{ span: 4 }}>
+                        <Form.Group className="mb-2">
+                            <Form.Label className="roboto"> Card Number </Form.Label>
+                            <Form.Control id="cardIn"/>
+                        </Form.Group>  
+                    </Col>
+
+                    <Col xl={{ span: 4, offset: 2 }}>
+                        <Form.Group className="mb-2">
+                            <Form.Label className="roboto"> Expiry Date </Form.Label>
+                            <Form.Control id="expiryIn" />
+                        </Form.Group>
+                    </Col>
+
+                    <Col xl={{ span: 4 }}>
+                        <Form.Group className="mb-2">
+                            <Form.Label className="roboto"> CVV </Form.Label>
+                            <Form.Control id="CVVIn" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+              <Button onClick={handleOrder} variant="accent" className="mt-3 mb-4">Order</Button>
+
+            </Form>
+            </Col>
+          </Row>
+        </Row>
+      </Container>
+
+      <Modal show={showSuc} >
+        <ModalHeader>
+            <ModalTitle>Success!!</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+            Your order has been placed!
+        </ModalBody>
+        <ModalFooter>
+            <Button variant="add" onClick={CloseSuc}> Home Page </Button>
+        </ModalFooter>
+      </Modal>
+
+
     </div>
-  )
+  );
 }
 
-export default CheckOut
+export default CheckOut;

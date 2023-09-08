@@ -1,70 +1,101 @@
-import React, { useState } from 'react'
-import { Button, Table, Modal, Form } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Button, Table, Modal, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function OrderProcess() {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [orderCart, setOrderCart] = useState();
+  let count = 0;
+  let num = 0;
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    return (
-        <div>
-            <Table responsive>
-                <thead className='roboto'>
-                    <tr className=''>
-                        <th className='customhead'>Order Nr</th>
-                        <th className='customhead'>Customer Name</th>
-                        <th className='customhead'>Date</th>
-                        <th className='customhead'>Total</th>
-                        <th className='customhead'>See more</th>
-                    </tr>
-                </thead>
-                <tbody className='condensed hover'>
-                    <tr className='custom'>
-                        <td className='custom'>#234</td>
-                        <td className='custom'>Jonah</td>
-                        <td className='custom'>Date</td>
-                        <td className='custom'>R 3500</td>
-                        <td className='custom'> <Link className='linkaccent' onClick={handleShow}>See</Link> </td>
-                    </tr>
-                    <tr className='custom'>
-                        <td className='custom'>#234</td>
-                        <td className='custom'>Jonah</td>
-                        <td className='custom'>Date</td>
-                        <td className='custom'>R 3500</td>
-                        <td className='custom'> <Link className='linkaccent'>See</Link> </td>
-                    </tr>
-                </tbody>
-            </Table>
+  const handleClose = () => setShow(false);
+  const handleShow = (itemKey) => {
+    const index = orders.findIndex(object => {
+        return object._id === itemKey
+    });
+    setOrderCart(orders[index].cart);
+    console.log(orderCart);
+    setShow(true)
+  }
 
-            <Modal show={show} onHide={handleClose} size='lg'>
-                <Modal.Header closeButton>
-                    <Modal.Title>Order Info</Modal.Title>
-                </Modal.Header>
+  useEffect(() => {
+    try {
+      Axios.get("http://localhost:5002/api/getorders").then((result) => {
+        let orderData = result.data;
+        setOrders(orderData);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setUpdate(false);
+  }, [update]);
 
-                <Modal.Body>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Order Nr</th>
-                                <th>QTY</th>
-                                <th>Customer</th>
-                                <th>Date</th>
-                                <th>Total</th>
-                                <th>Shipping</th>
-                                <th>Payment type</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                    </Table>
-                </Modal.Body>
+  const handleDispatch = (itemKey) => {
+    Axios.delete("http://localhost:5002/api/orders/" + itemKey);
+    console.log("dispatched order");
+    setUpdate(true);
+  };
 
-                <Modal.Footer>
-                    <Button onClick={handleClose}>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
-    )
+  return (
+    <div className="backgblue vh-100">
+      <Table responsive>
+        <thead className="roboto">
+          <tr className="">
+            <th className="customhead">Order Nr</th>
+            <th className="customhead">Customer Name</th>
+            <th className="customhead">Total</th>
+            <th className="customhead">See Cart</th>
+            <th className="customhead">Dispatched</th>
+          </tr>
+        </thead>
+        <tbody className="condensed hover">
+          {orders.map((item) => (
+            <tr key={item._id}>
+                {/* {num = count}; */}
+              <td className="custom"> #{item._id} </td>
+              <td className="custom"> {item.name} </td>
+              <td className="custom"> R {item.total} </td>
+              <td className="custom">
+                <Link className="linkaccent" onClick={() => handleShow(item._id)}> See </Link>
+              </td>
+              <td className="custom">
+                <Button variant="add" onClick={() => handleDispatch(item._id)}> Dispatched </Button>
+              </td>
+              {/* {count++}; */}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title className="roboto">Order Info</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Table>
+            <thead>
+              <tr>
+                <th className="roboto"> Cart </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> {orderCart} </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button onClick={handleClose}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 }
 
-export default OrderProcess
+export default OrderProcess;

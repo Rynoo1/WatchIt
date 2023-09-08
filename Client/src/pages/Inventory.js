@@ -3,6 +3,7 @@ import { Table, Modal, Button, Image, Form, FormLabel, FormGroup, Row, Col, Acco
 import ProductCard from '../components/productcard';
 import Axios from 'axios';
 import Footer from '../components/footer';
+import AllProdCard from '../components/allprodcard';
 
 function Inventory() {
     const [show, setShow] = useState(false);
@@ -85,8 +86,32 @@ function Inventory() {
         // document.getElementById("sizeIn").value = "";
         // document.getElementById("stockIn").value = "";
         // document.getElementById("priceIn").value = "";
-
     }
+
+
+// class Inventory extends React.Component {
+//     constructor(props) {
+//       super(props)
+  
+//       this.handler = this.handler.bind(this)
+//     }
+  
+//     handler() {
+//       this.setState({
+//         someVar: ''
+//       })
+//     }
+  
+//     render() {
+//       return <Child handler = {this.handler} />
+//     }
+//   }
+  
+//   class allprodcard extends React.Component {
+//     render() {
+//       return <AllProdCard onClick = {this.props.handler}/ >
+//     }
+//   }
 
     return (
         <div>
