@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
 import { Container, Form, FormControl, FormGroup, FormLabel, Button, Col, Row, Alert } from 'react-bootstrap'
 import Axios from 'axios'
 import Login from '../components/login'
@@ -18,13 +17,13 @@ function SignUp() {
     })
 
     const [errror, setErrror] = useState("");
-    const navigate = useNavigate();
 
     const handleChange = ({ currentTarget: input }) => {
         setData({...data, [input.name]: input.value})
         // console.log(data)
     }
 
+    // Add User
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
@@ -45,6 +44,7 @@ function SignUp() {
         }
     }
 
+    // display log in
     const handleLog = (e) => {
         setShowLog(false);
         setLog(log + '1');
@@ -101,6 +101,7 @@ function SignUp() {
                 </Container>
             </div>
 
+            {/* Log in Modal */}
             {showLog && <Login show={showLog} />  }
         </div>
     )

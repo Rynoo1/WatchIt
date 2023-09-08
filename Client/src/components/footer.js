@@ -15,7 +15,7 @@ function Footer() {
       setLoggedIn(true);
       setLoggedOut(false);
       setNormal(false);
-    } else if (admin === false) {
+    } else if (admin === "false") {
       setLoggedIn(false);
       setLoggedOut(false);
       setNormal(true);
@@ -33,6 +33,7 @@ function Footer() {
 
   return (
     <div className='backgblue'>
+      {/* Footer for Admin */}
 { loggedIn && <Row className='w-100 py-3 mt-3'>
                   <Col> <NavLink to="/" className='linkaccent'> <h1 className='prime'>Watch<span className='accent'>It</span></h1> </NavLink>  </Col>
                   <Col sm={{span:3 }} className='pt-2'> <NavLink to="/orders" className='linkaccent'><h2 className='roboto white'>Orders</h2></NavLink> </Col>
@@ -40,6 +41,7 @@ function Footer() {
                   <Col sm={3} className='pt-2'> <NavLink onClick={handleLog} className='linkaccent'><h2 className='roboto white'> Logout </h2></NavLink> </Col>
               </Row>}
 
+     {/* Footer for User */}
 { normal && <Row className='w-100 py-3 mt-3'>
                   <Col> <NavLink to="/" className='linkaccent'> <h1 className='prime'>Watch<span className='accent'>It</span></h1> </NavLink>  </Col>
                   <Col sm={{span:2, offset:1 }} className='pt-2'> <NavLink to="/allprod" className='linkaccent'><h2 className='roboto white'>Products</h2></NavLink> </Col>
@@ -47,6 +49,7 @@ function Footer() {
                   <Col sm={3} className='pt-2'> <NavLink onClick={handleLog} className='linkaccent'><h2 className='roboto white'> Logout </h2></NavLink> </Col>
               </Row>}
 
+      {/* Footer for not logged in */}
 { loggedOut && <Row className='w-100 py-3 mt-3'>
                   <Col> <NavLink to="/" className='linkaccent'> <h1 className='prime'>Watch<span className='accent'>It</span></h1> </NavLink>  </Col>
                   <Col sm={{span:2, offset: 4}} className='pt-2'> <NavLink to="/signup" className='linkaccent'><h2 className='roboto white'> Sign Up </h2></NavLink> </Col>

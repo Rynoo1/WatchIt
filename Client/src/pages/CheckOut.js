@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Table, Image, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap";
 import Axios from "axios";
-import Login from "../components/login";
 
 function CheckOut() {
   const [cart, setCart] = useState([]);
@@ -11,7 +10,6 @@ function CheckOut() {
   const [email, setEmail] = useState();
   let count = 0;
   let data = '';
-  const token = localStorage.getItem("token");
 
   const [showSuc, setShowSuc] = useState(false);
   const CloseSuc = () => {
@@ -19,6 +17,7 @@ function CheckOut() {
     window.location = '/';
   }
 
+  // create and add order to database
   const handleOrder = (e) => {
     while (count < cart.length) {
         data = data + cart[count].brand + ' ' + cart[count].model + ' - ' + cart[count].quantity + ', ';
@@ -32,7 +31,6 @@ function CheckOut() {
         total: total
     };
     Axios.post('http://localhost:5002/api/addorders', details)
-    // .then( window.location = '/');
     console.log(data);
     console.log(cart);
     sessionStorage.setItem('Cart', JSON.stringify([]));

@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap'
 import Axios from 'axios';
-import { useParams } from 'react-router-dom';
 import Footer from '../components/footer';
-// import Login from '../components/login';
 
 function IndividProd() {
   const myData = sessionStorage.getItem('productId');
@@ -12,22 +10,23 @@ function IndividProd() {
   const [cart, setCart] = useState([]);
   const [quan, setQuan] = useState(1);
 
+  // load data from db using product id in session storage
   useEffect(() => {
     Axios.get('http://localhost:5002/api/watch/' + myData)
       .then(result => {
         setProduct(result.data);
-        console.log(product);
       })
       .catch(err => console.log(err));
 
   }, []);
 
+  // add item to cart
   const handleAddCart = (key, brand, model, price, image, quantity) => {
     const newItem = { key: key, brand: brand, model: model, image: image,price: price , quantity: quantity}
     const existingCart = JSON.parse(sessionStorage.getItem('Cart')) || [];
     const updatedCart = [...existingCart, newItem];
     setCart(updatedCart);
-    sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
+    sessionStorage.setItem('Cart', JSON.stringify(cart));
     console.log(sessionStorage.getItem('Cart'));
   };
 

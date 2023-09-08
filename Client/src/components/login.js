@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, ModalFooter, Alert, Container } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, ModalBody, Alert } from 'react-bootstrap';
+import axios from 'axios';
 
 function Login() {
     const [show, setShow] = useState(true);
@@ -24,6 +23,7 @@ function Login() {
         setData({ ...data, [input.name]: input.value })
     };
 
+    // Authorise log in
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +32,7 @@ function Login() {
             localStorage.setItem("token", res.data);
             localStorage.setItem("admin", res.admin);
             if (res.admin === false) {
-                window.location = '/checkout';
+                window.location = '/';
             }else if (res.admin === true) {
                 window.location = '/inventory';
             }
@@ -71,10 +71,7 @@ function Login() {
                         </Row>
                     </Form>
                 </ModalBody>
-
             </Modal>
-
-            {/* <Button onClick={handleShow} >Submit</Button> */}
         </div>
     )
 }

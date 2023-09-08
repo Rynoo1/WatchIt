@@ -95,16 +95,6 @@ router.put('/api/watch/:id', upload.single('imageUp'), async(req, res) => {
         .catch(error => res.status(500).json(error))
 })
 
-router.put('/api/watchstock/:id', async(req, res) => {
-
-    const update = ({
-        stock: stock - req.body.stock
-    })
-    await WatchSchema.findByIdAndUpdate(req.params.id, update)
-        .then(response => res.json(response))
-        .catch(error => res.status(500).json(error))
-})
-
 //delete
 router.delete('/api/watch/:id', async(req, res) => {
     await WatchSchema.findByIdAndDelete(req.params.id)

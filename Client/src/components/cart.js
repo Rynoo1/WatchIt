@@ -2,11 +2,6 @@ import React, {useState} from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap'
 
 function Cart(props) {
-    // const [cart, setCart] = useState({
-    //     prodID: "",
-    //     prodName: "",
-        
-    // });
   return (
     <tr>
     <td> <Image fluid src={'http://localhost:5002/images/' + props.image} /> </td>

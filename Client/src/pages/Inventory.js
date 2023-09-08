@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Button, Image, Form, FormLabel, FormGroup, Row, Col, Accordion, FormControl } from 'react-bootstrap'
+import { Table, Button, Image, Form, FormLabel, FormGroup, Row, Col, Accordion, FormControl } from 'react-bootstrap'
 import ProductCard from '../components/productcard';
 import Axios from 'axios';
 import Footer from '../components/footer';
-import AllProdCard from '../components/allprodcard';
 
 function Inventory() {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     const [watches, setWatches] = useState();
     const [updateWatches, setUpdateWatches] = useState(false);
 
@@ -37,8 +31,6 @@ function Inventory() {
         reader.readAsDataURL(e.target.files[0]);
     };
 
-
-
     useEffect(() => {
         Axios.get('http://localhost:5002/api/getwatches')
             .then(result => {
@@ -53,13 +45,6 @@ function Inventory() {
             .catch(err => console.log(err));
 
     }, [updateWatches])
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:5002/api/getwatches')
-    //     .then (result => setWatches(result.data) )
-    //     .catch (err => console.log(err))
-    // }, [updateWatches])
-
 
     const addWatch = (e) => {
         const payload = new FormData()
@@ -162,7 +147,7 @@ function Inventory() {
                                     </FormGroup>
                                 </Col>
                             </Row>
-                            {/* two inputs  */}
+                            {/* three inputs  */}
 
                             <Row>
                                 <Col className="mb-3 ms-auto">
@@ -228,7 +213,7 @@ function Inventory() {
                 {/* accordion item  */}
             </Accordion>
             {/* accordion  */}
-
+        <Footer/>
         </div>
     )
 }

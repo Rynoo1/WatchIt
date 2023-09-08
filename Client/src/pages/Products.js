@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Accordion, Container, Image, Button, Form } from 'react-bootstrap'
+import { Row, Col, Accordion } from 'react-bootstrap'
 import AllProdCard from '../components/allprodcard'
 import Axios from 'axios'
 import '../products.css'
@@ -12,6 +12,7 @@ function Products() {
     const [call, setCall] = useState('http://localhost:5002/api/getwatches');
     // const [updateWatches, setUpdateWatches] = useState(true)
 
+    // find and display watches in brand filter
     const handleFilterBrand = (event, param) => {
         setCall('http://localhost:5002/api/brandwatches/' + param);
         console.log(param);
@@ -19,6 +20,7 @@ function Products() {
         setTitle(param);
     };
 
+    // find and display watches in strap filter
     const handleFilterStrap = (event, param) => {
         setCall('http://localhost:5002/api/strapwatches/' + param);
         console.log(param);
@@ -33,6 +35,7 @@ function Products() {
         setTitle(param);
     };
 
+    // load and display all watches
     useEffect(() => {
         Axios.get(call)
             .then(result => {
@@ -56,6 +59,7 @@ function Products() {
                         <h1 className='roboto prime pt-1'>Filters</h1>
                         <Accordion flush className='my-2 custom-accordion'>
                             <Accordion.Item eventKey='0' className='custom-accordion'>
+                                {/* accordion for brand filters */}
                                 <Accordion.Header className='header roboto'> Brands </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
                                     <ul className='no-bullets' id='brands'>
@@ -69,6 +73,7 @@ function Products() {
                                 </Accordion.Body>
                             </Accordion.Item>
 
+                            {/* accordion for strap filters */}
                             <Accordion.Item eventKey='1'>
                                 <Accordion.Header className='header roboto'> Straps </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>

@@ -16,6 +16,7 @@ export default function NavBar1() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // get cart from session storage
   useEffect(() => {
     try {
       const cartData = JSON.parse(sessionStorage.getItem('Cart')) || [];
@@ -29,7 +30,7 @@ export default function NavBar1() {
     }
   }, [show]);
 
-  // Function to remove an item from the cart
+  // remove an item from the cart
   const removeFromCart = (itemKey) => {
     const updatedCart = cart.filter((item) => item.key !== itemKey);
     setCart(updatedCart);
@@ -74,9 +75,10 @@ export default function NavBar1() {
         </Row>
       </Container>
 
+      {/* Cart Modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Current Cart</Modal.Title>
+          <Modal.Title> Current Cart </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Table borderless>
@@ -104,7 +106,6 @@ export default function NavBar1() {
             </tbody>
           </Table>
         </Modal.Body>
-
         <Modal.Footer>
           <Table>
             <thead>

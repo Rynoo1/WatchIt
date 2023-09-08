@@ -3,7 +3,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/esm/Container';
 import watch from '../images/watch.jpg';
 import casio from '../images/retrocasio.jpg';
-import tank from '../images/cartiertank.jpg'
 import { Row, Col, Image } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 

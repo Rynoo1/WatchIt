@@ -14,7 +14,8 @@ import SignUp from './pages/SignUp';
 
 
 function App() {
-  const user = localStorage.getItem("token")
+  const user = localStorage.getItem("token");
+  const admin = localStorage.getItem("admin");
   return (
     <div className="App backgblue">
       <NavBar1></NavBar1>
@@ -24,10 +25,8 @@ function App() {
         <Route path='/prod' element={<IndividProd/>} />
         <Route path='/allprod' element={<Products/>}/>
         {user && <Route path='/checkout' element={<CheckOut/>}/>}
-        <Route path='/inventory' element={<Inventory/>}/>
-        <Route path='/orders' element={<OrderProcess/>}/>
-        <Route path='/foot' element={<Footer/>}/>
-        <Route path='/login' element={<Login/>}/>
+        {admin && <Route path='/inventory' element={<Inventory/>}/>}
+        {admin && <Route path='/orders' element={<OrderProcess/>}/>}
       </Routes>
     </div>
   );

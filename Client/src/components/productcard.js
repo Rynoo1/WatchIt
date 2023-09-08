@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Image, Button, Modal, Table, Form, Alert } from 'react-bootstrap';
+import { Col, Row, Image, Button, Modal, Table, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import Axios from 'axios';
 
@@ -8,6 +8,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
     const [showDel, setShowDel] = useState(false);
     const [showSuc, setShowSuc] = useState(false);
 
+    // handle Closing and Showing of editing modal
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleSubmit = () => {
@@ -15,6 +16,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         setShow(false)
     };
 
+    // handle closing and Showing of delete modal
     const handleCloseDel = () => setShowDel(false);
     const handleShowDel = () => setShowDel(true);
     const handleDel = () => {
@@ -23,6 +25,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         setShowSuc(true);
     };
 
+    // handle closing of Successful delete modal
     const handleCloseSuc = () => setShowSuc(false);
 
     const [uBrand, setUBrand] = useState();
@@ -36,15 +39,15 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
 
     let id2 = id;
 
+    // handle deleting watch
     const deleteWatch = (e) => {
         Axios.delete('http://localhost:5002/api/watch/' + id2);
         console.log('deleted watch');
         setShowSuc(true);
     };
     
-
+    // get image from input on change
     const getImage = (e) => {
-        
         let imageFile = e.target.files[0];
         setUImage(imageFile);
         console.log(uImage);
@@ -57,6 +60,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         reader.readAsDataURL(e.target.files[0]);
     };
 
+    // update Watch
     const updateWatch = (e) => {
 
         const payloadUp = new FormData()
@@ -70,7 +74,6 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
             stock: uStock,
             price: uPrice
         }
-
         payloadUp.append('information', JSON.stringify(details));
         payloadUp.append('imageUp', uImage);
 
@@ -110,8 +113,8 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={handleCloseDel}>Cancel</Button>
-                    <Button onClick={handleDel} >Delete</Button>
+                    <Button variant='sign' onClick={handleCloseDel}> Cancel </Button>
+                    <Button variant='add' onClick={handleDel} > Delete </Button>
                 </Modal.Footer>
             </Modal>
 
@@ -157,7 +160,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={handleSubmit}>Save Changes</Button>
+                    <Button variant='add' onClick={handleSubmit}> Save Changes </Button>
                 </Modal.Footer>
             </Modal>
 
