@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Container, Form, FormControl, FormGroup, FormLabel, Button, Col, Row, Alert } from 'react-bootstrap'
 import Axios from 'axios'
+import Login from '../components/login'
 
 function SignUp() {
+    const [showLog, setShowLog] = useState(false);
+    const [log, setLog] = useState();
+    
 
     const [data, setData] = useState({
         firstname: "",
         lastname: "",
         email: "",
-        password: ""
+        password: "",
+        admin: false
     })
 
     const [errror, setErrror] = useState("");
@@ -17,6 +22,7 @@ function SignUp() {
 
     const handleChange = ({ currentTarget: input }) => {
         setData({...data, [input.name]: input.value})
+        // console.log(data)
     }
 
     const handleSubmit = async(e) => {
@@ -25,8 +31,9 @@ function SignUp() {
             const url = 'http://localhost:5002/api/users';
             console.log(data);
             const {data: res} = await Axios.post(url, data);
-            navigate("/login")
+            // setLog( <Login show={showLog} /> );
             console.log(res.message);
+            setErrror(res.message);
         } catch (error) {
             if (error.response && 
                 error.response.status >= 400 &&
@@ -38,8 +45,20 @@ function SignUp() {
         }
     }
 
+    const handleLog = (e) => {
+        setShowLog(false);
+        setLog(log + '1');
+        console.log('click '+ showLog);
+    }
+
+    useEffect(() => {
+        setShowLog(true);
+        console.log('use ' + showLog);
+    }, [log]);
+    
+
     return (
-        <div className='backgprime'>
+        <div className='backgprime vh-100'>
             <div className='pt-2 pb-3'>
                 <h1 className='roboto pe-3 accent' >Sign Up <span className='blue' >Now!</span> </h1>
                 <Container className='backgblue pb-3'>
@@ -75,11 +94,14 @@ function SignUp() {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        {errror && <Alert>{errror}</Alert>}
-                        <Button type='submit' variant='accent' className='mt-3' >Submit</Button>
+                        {errror && <Alert className='mt-3' >{errror}</Alert>}
+                        <Button type='submit' variant='accent' className='mt-3 me-3' > Submit </Button>
+                        <Button onClick={handleLog} variant='accent' className='mt-3 ms-3' > Log In </Button>
                     </Form>
                 </Container>
             </div>
+
+            {showLog && <Login show={showLog} />  }
         </div>
     )
 }

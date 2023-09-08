@@ -6,8 +6,7 @@ import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { Modal, Table, Image, Row, Col, Button } from 'react-bootstrap';
-import CasioProduct from '../images/casioprod2.png';
-import Cart from './cart';
+// import Cart from './cart';
 
 export default function NavBar1() {
   const [show, setShow] = useState(false);
@@ -44,7 +43,13 @@ export default function NavBar1() {
   };
 
   const handleCheck = (e) => {
-    window.location = '/';
+    const token = localStorage.getItem("token");
+    if (token) {
+      window.location = '/checkout';
+    }else {
+      window.location = '/signup';
+    }
+    
   }
 
   return (
@@ -109,7 +114,7 @@ export default function NavBar1() {
               </tr>
             </thead>
           </Table>
-          <Button variant='add' onClick={handleCheck}> Checkout </Button>
+          { cart[0] && <Button variant='add' onClick={handleCheck}> Checkout </Button>}
         </Modal.Footer>
       </Modal>
     </Navbar>

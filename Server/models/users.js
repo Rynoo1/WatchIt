@@ -19,6 +19,10 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    admin: {
+        type: Boolean,
+        required: true,
     }
 });
 
@@ -34,7 +38,8 @@ const validate = (data) => {
         firstname: Joi.string().required().label("First Name"),
         lastname: Joi.string().required().label("Last Name"),
         email: Joi.string().required().label("Email"),
-        password: passwordComplexity().required().label("Password")
+        password: passwordComplexity().required().label("Password"),
+        admin: Joi.boolean().required().label("admin")
     });
     return schema.validate(data)
 };

@@ -79,7 +79,6 @@ router.post('/api/addwatch', upload.single('image'), async(req, res) => {
 router.put('/api/watch/:id', upload.single('imageUp'), async(req, res) => {
 
     let data = JSON.parse(req.body.information)
-    console.log(req.file.filename);
     const update = ({
         brand: data.brand,
         model: data.model,
@@ -90,6 +89,16 @@ router.put('/api/watch/:id', upload.single('imageUp'), async(req, res) => {
         stock: data.stock,
         description: data.description,
         image: req.file.filename
+    })
+    await WatchSchema.findByIdAndUpdate(req.params.id, update)
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
+})
+
+router.put('/api/watchstock/:id', async(req, res) => {
+
+    const update = ({
+        stock: stock - req.body.stock
     })
     await WatchSchema.findByIdAndUpdate(req.params.id, update)
         .then(response => res.json(response))

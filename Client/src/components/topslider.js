@@ -20,7 +20,7 @@ export default function TopSlider() {
                     <Row>
                         <Col>
                             <h1 className='white display-6 roboto'>New Watches</h1>
-                            <h4 className='white condensed slidertext'>Lorem ipsum dolor sit amet consectetur. Molestie eleifend integer tincidunt facilisi mollis dignissim tellus.</h4>
+                            <h4 className='white condensed slidertext'> Shop all the latest watches at the best prices available. Pick up great watches at even better prices with regular sales. </h4>
                             <Button onClick={handleClick} variant='accent condensed mb-3'> Shop Now </Button>
                         </Col>
 
@@ -45,7 +45,7 @@ export default function TopSlider() {
                 </Container>
             </Carousel.Item>
 
-            <Carousel.Item className='backgblue'>
+            {/* <Carousel.Item className='backgblue'>
                 <Container className='mb-5 mt-4'>
                     <Row>
                         <Col xl={5}>
@@ -58,9 +58,9 @@ export default function TopSlider() {
                     </Row>
                     {/* <Row>
                         
-                    </Row> */}
+                    </Row> 
                 </Container>
-            </Carousel.Item>
+            </Carousel.Item> */}
 
         </Carousel>
     );

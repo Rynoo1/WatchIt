@@ -19,7 +19,6 @@ function App() {
     <div className="App backgblue">
       <NavBar1></NavBar1>
       <Routes>
-        {/* {user && <Route path='/' element = {<Landing/>}/>} */}
         <Route path='/signup' element = {<SignUp/>} />
         <Route path='/' element={<Landing/>} />
         <Route path='/prod' element={<IndividProd/>} />
@@ -29,7 +28,6 @@ function App() {
         <Route path='/orders' element={<OrderProcess/>}/>
         <Route path='/foot' element={<Footer/>}/>
         <Route path='/login' element={<Login/>}/>
-        {/* <Route path='/sign' element={<SignUp/>}/> */}
       </Routes>
     </div>
   );

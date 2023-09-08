@@ -3,8 +3,8 @@ import { Button, Row, Col, Form, FormControl, FormGroup, FormLabel, Modal, Modal
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function Login(props) {
-    const [show, setShow] = useState(props.show);
+function Login() {
+    const [show, setShow] = useState(true);
 
     const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
@@ -30,7 +30,12 @@ function Login(props) {
             const url = 'http://localhost:5002/api/auth'
             const { data: res } = await axios.post(url, data);
             localStorage.setItem("token", res.data);
-            window.location = "/";
+            localStorage.setItem("admin", res.admin);
+            if (res.admin === false) {
+                window.location = '/checkout';
+            }else if (res.admin === true) {
+                window.location = '/inventory';
+            }
 
             console.log(res.message);
         } catch (error) {

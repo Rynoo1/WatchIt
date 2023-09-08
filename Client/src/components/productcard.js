@@ -32,7 +32,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
     const [uPrice, setUPrice] = useState();
     const [uStock, setUStock] = useState();
     const [uYear, setUYear] = useState();
-    const [uImage, setUImage] = useState();
+    const [uImage, setUImage] = useState(image);
 
     let id2 = id;
 
@@ -75,23 +75,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
         payloadUp.append('imageUp', uImage);
 
         Axios.put('http://localhost:5002/api/watch/' + id2, payloadUp);
-
-        
-        // Axios.post('http://localhost:5002/upload', formdata)
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
     };
-
-    // const handleImage = (e) => {
-    //     const formdata = new FormData()
-    //     formdata.append('file', uImage)
-    //     Axios.post('http://localhost:5002/upload', formdata)
-    //         .then(res => console.log(res))
-    //         .catch(err => console.log(err))
-    // }
-
-    // let imgsrc = '"../images/' + image + '"';
-    // console.log(imgsrc);
 
     return (
 
@@ -160,10 +144,6 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
                                 <td> <Form.Control onChange={(e) => setUStock(e.target.value)} placeholder={stock} /> </td>
                                 <td> <Form.Control onChange={(e) => setUYear(e.target.value)} placeholder={year} /> </td>
                             </tr>
-                            {/* <tr>
-                                <td> <Form.Control onChange={getImage} placeholder={image} type="file" /> </td>
-                                <td> <Image thumbnail id='preview' /> </td>
-                            </tr> */}
                         </tbody>
                     </Table>
                     <Row>

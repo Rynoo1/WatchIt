@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Table, Image, Button, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap";
-// import CasioProduct from "../images/casioprod1.png";
-// import Cart from "../components/cart";
 import Axios from "axios";
+import Login from "../components/login";
 
 function CheckOut() {
   const [cart, setCart] = useState([]);
@@ -12,6 +11,7 @@ function CheckOut() {
   const [email, setEmail] = useState();
   let count = 0;
   let data = '';
+  const token = localStorage.getItem("token");
 
   const [showSuc, setShowSuc] = useState(false);
   const CloseSuc = () => {
@@ -64,7 +64,7 @@ useEffect(() => {
     sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
   };
 
-  return (
+  return (  
     <div>
       <Container>
         <Row>
@@ -108,24 +108,23 @@ useEffect(() => {
                   {cart.map((item) => (
                     <tr key={item.key}>
                         <td> <Image fluid src={"http://localhost:5002/images/" + item.image} /> </td>
-                        <td> {item.brand} {item.model} </td>
-                        <td> {item.quantity} </td>
-                        <td> R {item.price * item.quantity}</td>
+                        <td className="roboto"> {item.brand} {item.model} </td>
+                        <td className="roboto"> {item.quantity} </td>
+                        <td className="roboto"> R {item.price * item.quantity}</td>
                         <td>
                             <Button variant="add" onClick={() => removeFromCart(item.key)}> Remove </Button>
                         </td>
                     </tr>              
                   ))}
-                {/* <thead>
-                    {/* <th></th> */}
-                    {/* <th></th>
-                    <th></th>
-                    <th>Total</th>
-                    <th> R {total} </th>
-                </thead>           */}
-                </tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td className="roboto">Total: </td>
+                    <td className="roboto"> R {total} </td>
+                  </tr>
 
-              {/* </tbody> */}
+                </tbody>
             </Table>
           </Col>
         </Row>
@@ -184,8 +183,7 @@ useEffect(() => {
         </ModalFooter>
       </Modal>
 
-
-    </div>
+    </div> 
   );
 }
 

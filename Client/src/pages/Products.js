@@ -56,7 +56,7 @@ function Products() {
                         <h1 className='roboto prime pt-1'>Filters</h1>
                         <Accordion flush className='my-2 custom-accordion'>
                             <Accordion.Item eventKey='0' className='custom-accordion'>
-                                <Accordion.Header className='header'>Brands</Accordion.Header>
+                                <Accordion.Header className='header roboto'> Brands </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
                                     <ul className='no-bullets' id='brands'>
                                         <li onClick={event => handleAll(event, 'All')} className='listitem' >All</li>
@@ -70,9 +70,9 @@ function Products() {
                             </Accordion.Item>
 
                             <Accordion.Item eventKey='1'>
-                                <Accordion.Header className='header'>Straps</Accordion.Header>
+                                <Accordion.Header className='header roboto'> Straps </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
-                                    <ul className='no-bullets' id='brands'>
+                                    <ul className='no-bullets' id='straps'>
                                         <li onClick={event => handleAll(event, 'All')} className='listitem' >All</li>
                                         <li onClick={event => handleFilterStrap(event, 'Leather')} className='listitem' > Leather </li>
                                         <li onClick={event => handleFilterStrap(event, 'Metal')} className='listitem' > Metal </li>

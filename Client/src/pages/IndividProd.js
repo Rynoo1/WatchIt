@@ -8,21 +8,9 @@ import Footer from '../components/footer';
 function IndividProd() {
   const myData = sessionStorage.getItem('productId');
   console.log("Productid " + myData);
-  // const [image, setImage] = useState(casio);
   const [product, setProduct] = useState([]);
-  const user = localStorage.getItem("token");
-  const [showLog, setShowLog] = useState(true);
   const [cart, setCart] = useState([]);
   const [quan, setQuan] = useState(1);
-  const [count, setCount] = useState(1);
-  const [upCart, setUpCart] = useState([]);
-  // const quant = useRef(0);
-  // const changeImage1 = () => {
-  //   setImage(casio);
-  // };
-  // const changeImage2 = () => {
-  //   setImage(casioback);
-  // };
 
   useEffect(() => {
     Axios.get('http://localhost:5002/api/watch/' + myData)
@@ -33,21 +21,6 @@ function IndividProd() {
       .catch(err => console.log(err));
 
   }, []);
-
-  // useEffect(() => {
-  //   try {
-  //     console.log(quan);
-  //     // setCart([JSON.parse(sessionStorage.getItem('Cart'))]);
-  //     setUpCart([cart]);
-  //     console.log(upCart)
-  //     setCount(count+1);
-  //     //setUpCart([...upCart, { key: count, id: myData, brand: product.brand, model: product.model, image: product.image,price: product.price , quantity: quan}]);
-  //     sessionStorage.setItem('Cart', JSON.stringify(upCart));
-  //     // sessionStorage.setItem('Cart', '');
-  //   } catch (error) {
-  //     setShowLog(true);
-  //   }
-  // }, [cart]);
 
   const handleAddCart = (key, brand, model, price, image, quantity) => {
     const newItem = { key: key, brand: brand, model: model, image: image,price: price , quantity: quantity}
@@ -93,7 +66,6 @@ function IndividProd() {
           </Col>
         </Row>
       </Container>
-      {/* <Login show={showLog} /> */}
       <Footer/>
     </div>
   )
