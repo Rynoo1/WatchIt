@@ -40,6 +40,20 @@ router.get('/api/strapwatches/:strap', async (req, res) => {
     res.json(findStraps)
 })
 
+//newest first
+router.get('/api/newest', async (req, res) => {
+    try {
+        const newestItems = await WatchSchema.find()
+        .sort({ _id: -1})
+        .limit(3);
+        
+        res.json(newestItems)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'Server Error'});
+    }
+})
+
 //Middleware
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
