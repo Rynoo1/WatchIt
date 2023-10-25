@@ -7,13 +7,15 @@ const multer = require('multer');
 //get all watches
 router.get('/api/getwatches', async (req, res) => {
     const findWatches = await WatchSchema.find()
-    res.json(findWatches)
+    .then(res.json(findWatches))
+    .catch(error => res.status(500).json(error))
 })
 
 //get specific watch
 router.get('/api/watch/:id', async (req, res) => {
     const findWatch = await WatchSchema.findById(req.params.id)
-    res.json(findWatch)
+    .then(res.json(findWatch))
+    .catch(error => res.status(500).json(error))
 })
 
 //filter straps
@@ -21,7 +23,8 @@ router.get('/api/strapwatches/:strap', async (req, res) => {
     const findStraps = await WatchSchema.find()
         .where("strap")
         .in(req.params.strap)
-    res.json(findStraps)
+    .then(res.json(findStraps))
+    .catch(error => res.status(500).json(error))
 })
 
 //filter brands
@@ -29,7 +32,8 @@ router.get('/api/brandwatches/:brand', async (req, res) => {
     const findBrands = await WatchSchema.find()
         .where("brand")
         .in(req.params.brand)
-    res.json(findBrands)
+    .then(res.json(findBrands))
+    .catch(error => res.status(500).json(error))
 })
 
 //filter straps
@@ -37,7 +41,8 @@ router.get('/api/strapwatches/:strap', async (req, res) => {
     const findStraps = await WatchSchema.find()
         .where("strap")
         .in(req.params.brand)
-    res.json(findStraps)
+    .then(res.json(findStraps))
+    .catch(error => res.status(500).json(error))
 })
 
 //newest first
