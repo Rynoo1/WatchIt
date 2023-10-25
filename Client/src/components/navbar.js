@@ -87,7 +87,7 @@ export default function NavBar1() {
                 <th> Image </th>
                 <th> Name </th>
                 <th> Quantity </th>
-                <th> Total... </th>
+                <th> Total<span className='text-white' >...</span> </th>
                 <th> Remove </th>
               </tr>
             </thead>

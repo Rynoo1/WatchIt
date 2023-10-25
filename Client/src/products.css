@@ -36,3 +36,12 @@
   .productstxt:hover{
     color: #FF5035;
   }
+
+  .hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+
+.hover-text {
+    box-shadow: 10px 10px 5px #2c343960;
+}

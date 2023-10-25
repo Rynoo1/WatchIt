@@ -8,7 +8,7 @@ function Cart(props) {
     <td> {props.brand} {props.model} </td>
     <td> {props.quantity} </td>
     <td> {props.price} </td>
-    <td>remove</td>
+    <td> remove </td>
 </tr>
   )
 }

@@ -6,9 +6,12 @@ const multer = require('multer');
 
 //get all watches
 router.get('/api/getwatches', async (req, res) => {
-    const findWatches = await WatchSchema.find()
-    .then(res.json(findWatches))
-    .catch(error => res.status(500).json(error))
+    try {
+        const findWatches = await WatchSchema.find();
+        res.json(findWatches);
+    } catch (error) {
+        res.status(500).json(error);
+    }
 })
 
 //get specific watch
