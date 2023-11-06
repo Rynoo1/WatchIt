@@ -16,9 +16,12 @@ router.get('/api/getwatches', async (req, res) => {
 
 //get specific watch
 router.get('/api/watch/:id', async (req, res) => {
-    const findWatch = await WatchSchema.findById(req.params.id)
-    .then(res.json(findWatch))
-    .catch(error => res.status(500).json(error))
+    try {
+        const findWatch = await WatchSchema.findById(req.params.id)
+        res.json(findWatch)
+    } catch (error) {
+        res.status(500).json(error);
+    }
 })
 
 //filter straps
