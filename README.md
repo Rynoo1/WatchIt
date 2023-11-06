@@ -10,7 +10,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+
+  ![Alt text](readme_images/Group%2085.png)
+
   </a>
 
 <h3 align="center">WatchIt</h3>
@@ -164,10 +166,14 @@ You can now access the application through your web browser at `http://localhost
 
 Creative and technical decisions made. Describe architecture of the systems, theme of the application and the reason why I approached the project in this way. ERD's, User-flow, Dataflow, etc go here. Can include code snippets to explain approach to implement specific functionality, challenges faced and how it was approached to solve them, reviews and tests that were performed etc.
 
---User Flow
---Data Flow
+**Use Case Diagram**
+![Alt text](readme_images/E-Commerce%20Use%20Case%20Diagram.png)
 
-challenges
+**Data Flow Diagram**
+![Alt text](readme_images/WatchIt%20Data%20Flow%20Diagram(1).png)
+
+<br/>
+challenges faced
 
 -image handling using multer
 
