@@ -21,10 +21,10 @@ router.get('/api/watch/:id', async (req, res) => {
         if (!findWatch) {
             res.status(404).json({ error: "Prodct not found" });
         } else {
-        res.json(findWatch)
+            res.json(findWatch)
         }
     } catch (error) {
-        res.status(500).json({ error: "It seems an error occured while fetching this product :/"});
+        res.status(500).json({ error: "It seems an error occured while fetching this product :/" });
     }
 })
 
@@ -33,8 +33,10 @@ router.get('/api/strapwatches/:strap', async (req, res) => {
     const findStraps = await WatchSchema.find()
         .where("strap")
         .in(req.params.strap)
-    .then(res.json(findStraps))
-    .catch(error => res.status(500).json(error))
+        .then(findStraps => {
+            res.json(findStraps)
+        })
+        .catch(error => res.status(500).json(error))
 })
 
 //filter brands
@@ -42,30 +44,23 @@ router.get('/api/brandwatches/:brand', async (req, res) => {
     const findBrands = await WatchSchema.find()
         .where("brand")
         .in(req.params.brand)
-    .then(res.json(findBrands))
-    .catch(error => res.status(500).json(error))
-})
-
-//filter straps
-router.get('/api/strapwatches/:strap', async (req, res) => {
-    const findStraps = await WatchSchema.find()
-        .where("strap")
-        .in(req.params.brand)
-    .then(res.json(findStraps))
-    .catch(error => res.status(500).json(error))
+        .then(findBrands => {
+            res.json(findBrands)
+        })
+        .catch(error => res.status(500).json(error))
 })
 
 //newest first
 router.get('/api/newest', async (req, res) => {
     try {
         const newestItems = await WatchSchema.find()
-        .sort({ _id: -1})
-        .limit(3);
-        
+            .sort({ _id: -1 })
+            .limit(3);
+
         res.json(newestItems)
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: 'Server Error'});
+        res.status(500).json({ message: 'Server Error' });
     }
 })
 
