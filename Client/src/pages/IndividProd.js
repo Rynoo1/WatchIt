@@ -12,7 +12,7 @@ function IndividProd() {
   const [cart, setCart] = useState([]);
   const [quan, setQuan] = useState(1);
   const [errorMes, setErrorMes] = useState();
-  const [showError, setShowError] = useState(true);
+  const [showError, setShowError] = useState(false);
 
 
   const location = useLocation();
@@ -27,8 +27,15 @@ function IndividProd() {
         setErrorMes(null);
       })
       .catch(err => {
-        console.log(err);
-        setErrorMes(<ErrorCard message={err.message} />);
+        console.error("Error Fetching Product: ", err);
+        // console.log(err.response.statusText);
+        if (err.response) {
+          setErrorMes(<ErrorCard message={err.response.statusText} code={err.response.status} />);
+          setShowError(true);
+        } else {
+          setErrorMes(<ErrorCard message={err.message} />);
+          setShowError(true);
+        }
       });
 
   }, []);
@@ -39,7 +46,7 @@ function IndividProd() {
     const existingCart = JSON.parse(sessionStorage.getItem('Cart')) || [];
     const updatedCart = [...existingCart, newItem];
     setCart(updatedCart);
-    sessionStorage.setItem('Cart', JSON.stringify(cart));
+    sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
     console.log(sessionStorage.getItem('Cart'));
   };
 

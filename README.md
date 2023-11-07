@@ -182,6 +182,11 @@ challenges faced
 -passing product id to individual product page
 --used session storage, then url
 
+-displaying navbar and footer differently dependig on who is signed in
+--sesstion storage and && if statement
+
+-cart link removing product id from url??
+--used a tag instead of navlink
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

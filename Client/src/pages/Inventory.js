@@ -39,7 +39,7 @@ function Inventory() {
                 // console.log(watchData[1].image)
                 let renderWatches = watchData.map((temp) => <ProductCard key={temp._id} id={temp._id} brand={temp.brand} price={temp.price} model={temp.model} stock={temp.stock} strap={temp.strap} size={temp.size} year={temp.year} image={temp.image} />);
                 setWatches(renderWatches);
-                console.log(watches);
+                // console.log(watches);
                 setUpdateWatches(false);
             })
             .catch(err => console.log(err));
@@ -64,39 +64,7 @@ function Inventory() {
 
         Axios.post('http://localhost:5002/api/addwatch', payload);
         setUpdateWatches(true);
-        // document.getElementById("brandIn").value = "";
-        // document.getElementById("modelIn").value = "";
-        // document.getElementById("yearIn").value = "";
-        // document.getElementById("strapIn").value = "";
-        // document.getElementById("sizeIn").value = "";
-        // document.getElementById("stockIn").value = "";
-        // document.getElementById("priceIn").value = "";
     }
-
-
-// class Inventory extends React.Component {
-//     constructor(props) {
-//       super(props)
-  
-//       this.handler = this.handler.bind(this)
-//     }
-  
-//     handler() {
-//       this.setState({
-//         someVar: ''
-//       })
-//     }
-  
-//     render() {
-//       return <Child handler = {this.handler} />
-//     }
-//   }
-  
-//   class allprodcard extends React.Component {
-//     render() {
-//       return <AllProdCard onClick = {this.props.handler}/ >
-//     }
-//   }
 
     return (
         <div>

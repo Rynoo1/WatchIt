@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { Modal, Table, Image, Row, Col, Button } from 'react-bootstrap';
 // import Cart from './cart';
@@ -69,7 +69,7 @@ export default function NavBar1() {
 
           <Col xs={{ span: 1, offset: 2 }} >
             <Nav className='ms-auto pt-2'>
-              <NavLink className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </NavLink>
+              <a href='#' className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </a>
             </Nav>
           </Col>
         </Row>

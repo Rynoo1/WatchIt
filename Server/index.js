@@ -38,7 +38,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     dbName: 'watchit', //Collection Name
-}).then(() => console.log("Connected to watchit DB"))
+}).then(() => console.log("Connected to WatchIt DB"))
     .catch((err) => {
         console.log("No Connection. Reason: " + err);
     });

@@ -18,9 +18,13 @@ router.get('/api/getwatches', async (req, res) => {
 router.get('/api/watch/:id', async (req, res) => {
     try {
         const findWatch = await WatchSchema.findById(req.params.id)
+        if (!findWatch) {
+            res.status(404).json({ error: "Prodct not found" });
+        } else {
         res.json(findWatch)
+        }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: "It seems an error occured while fetching this product :/"});
     }
 })
 

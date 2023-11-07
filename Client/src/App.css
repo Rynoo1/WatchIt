@@ -117,6 +117,15 @@
   box-shadow: 0.04em 0.04em 0.3em #171b1e;
 }
 
+.btn-err{
+  background-color: #2C3439 !important;
+  color: #CED9BF !important;
+  font-family: 'Roboto', sans-serif !important;
+  border-radius: 0px !important;
+  border: 2px solid !important;
+  box-shadow: 0.04em 0.04em 0.2em #171b1e;
+}
+
 .linkaccent{
   color: #FF5035 !important;
   text-decoration: none !important;

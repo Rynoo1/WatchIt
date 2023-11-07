@@ -49,6 +49,7 @@ function Landing() {
                         <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Cartier} />
                             <h5 className='condensed text-light mt-2'>Cartier Tank watch</h5>
+                            <h6 className='white condensed'> Was - R60000 <span className='accent'> Now - R50000 </span> </h6>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>

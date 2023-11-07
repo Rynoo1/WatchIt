@@ -63,26 +63,26 @@ useEffect(() => {
   };
 
   return (  
-    <div>
+    <div className="vh-100" >
       <Container>
         <Row>
           <Col className="backgaccent me-2">
-            <h3 className="roboto mt-2"> Personal Information </h3>
+            <h3 className="roboto mt-2 blue"> Personal Information </h3>
             <Form className="mt-4">
               <Form.Group as={Row} className="mb-2">
-                <Form.Label column xl={{ span: 3, offset: 1 }} className="roboto white"> Full Name </Form.Label>
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed white"> Full Name </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setName(e.target.value)} id="nameIn" />
                 </Col>
               </Form.Group>
               <Form.Group as={Row} className="mb-2">
-                <Form.Label column xl={{ span: 3, offset: 1 }} className="roboto white"> Email </Form.Label>
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed white"> Email Address </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" id="emailIn" />
                 </Col>
               </Form.Group>
               <Form.Group as={Row} className="mb-2">
-                <Form.Label  column  xl={{ span: 3, offset: 1 }}  className="roboto white"> Address </Form.Label>
+                <Form.Label  column  xl={{ span: 3, offset: 1 }}  className="condensed white"> Physical Address </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setAddress(e.target.value)} id="addressIn" />
                 </Col>
@@ -91,14 +91,14 @@ useEffect(() => {
           </Col>
 
           <Col className="backgprime">
-            <h3 className="roboto mt-2">Cart</h3>
+            <h3 className="roboto mt-2 blue"> Cart </h3>
             <Table>
               <thead>
                 <tr>
                   <th> Image </th>
                   <th> Name </th>
                   <th> Quantity </th>
-                  <th> Total..... </th>
+                  <th> Total<span className="white">.....</span> </th>
                   <th> Remove </th>
                 </tr>
               </thead>
@@ -126,7 +126,7 @@ useEffect(() => {
             </Table>
           </Col>
         </Row>
-        <Row className="backgprime mt-3 mx-3">
+        <Row className="backgprime mt-3 mx-3 mb-3">
           <h3 className="roboto mt-2">Payment information</h3>
           <Row>
             <Col>
