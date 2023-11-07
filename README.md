@@ -128,7 +128,7 @@ npm install mongoose
 Install Frontend dependencies: Navigate to client directory and install frontend dependencies
 ```sh
 cd client
-npm install
+npm install react-router-dom bootstrap react-bootstrap axios 
 ```
 
 **5. Start the Development Servers**
