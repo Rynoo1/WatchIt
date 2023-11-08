@@ -47,6 +47,7 @@
     </li>
     <li><a href="#project-features">Project Features</a></li>
     <li><a href="#development-process">Development Process</a></li>
+    <li><a href="#final-outcome">Final Outcome</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
