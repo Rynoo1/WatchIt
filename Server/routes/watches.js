@@ -3,6 +3,7 @@ const WatchSchema = require('../models/watches')
 const router = express();
 const path = require('path');
 const multer = require('multer');
+const fs = require('fs');
 
 //get all watches
 router.get('/api/getwatches', async (req, res) => {
@@ -121,6 +122,15 @@ router.put('/api/watch/:id', upload.single('imageUp'), async (req, res) => {
 
     let data = JSON.parse(req.body.information)
     if (req.file) {
+
+        const existing = await WatchSchema.findById(req.params.id);
+        if (existing.image) {
+            fs.unlink(`./images/${existing.image}`, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
         const update = ({
             brand: data.brand,
             model: data.model,
@@ -154,9 +164,26 @@ router.put('/api/watch/:id', upload.single('imageUp'), async (req, res) => {
 
 //delete
 router.delete('/api/watch/:id', async (req, res) => {
-    await WatchSchema.findByIdAndDelete(req.params.id)
-        .then(response => res.json(response))
-        .catch(error => res.status(500).json(error))
+    try {
+        const watch = await WatchSchema.findById(req.params.id);
+        if (!watch) {
+            return res.status(404).json({ message: "Watch not Found!" });
+        }
+
+        if (watch.image) {
+            fs.unlink(`./images/${watch.image}`, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+
+        await watch.deleteOne();
+        res.status(201).json({ message: "Watch successfully deleted!" });
+    } catch (error) {
+        console.error("Error deleting Watch: ", error);
+        res.status(500).json(error);
+    }
 })
 
 

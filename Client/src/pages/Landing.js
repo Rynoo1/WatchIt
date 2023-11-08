@@ -41,22 +41,24 @@ function Landing() {
                     <Row className='justify-content-center pb-3'>
                         <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={CasioProduct} />
-                            <h5 className='condensed text-light mt-2'>Casio Retro Vintage watch</h5>
+                            <h5 className='condensed text-light mt-2'>Casio A100WE</h5>
+                            <h6 className='white condensed'> Was - R500 <span className='accent'> Now - R300 </span> </h6>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
                         <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Cartier} />
-                            <h5 className='condensed text-light mt-2'>Cartier Tank watch</h5>
-                            <h6 className='white condensed'> Was - R60000 <span className='accent'> Now - R50000 </span> </h6>
+                            <h5 className='condensed text-light mt-2'>Cartier Tank Must</h5>
+                            <h6 className='white condensed'> Was - R7500 <span className='accent'> Now - R6000 </span> </h6>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>
 
                         <Col xs={6} sm={3} className='backgblue rounded me-2 mb-1 py-2'>
                             <img className='img-thumbnail' src={Patek} />
-                            <h5 className='condensed text-light mt-2'>Patek Philippe watch</h5>
+                            <h5 className='condensed text-light mt-2'>Patek Philippe Nautilus</h5>
+                            <h6 className='white condensed'> Was - R10000 <span className='accent'> Now - R8000 </span> </h6>
                             <Button variant='add' className='mb-2 me-2'>View</Button>
                             <Button variant='add' className='mb-2'>Add to cart</Button>
                         </Col>

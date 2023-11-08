@@ -17,12 +17,6 @@ function AllProdCard(props) {
     }
 
     const handleButtonClick = () => {
-        // console.log("Navigate")
-        // sessionStorage.setItem('productId', props.id);
-        // Set data in sessionStorage
-        // window.location = '/prod';
-        // Navigate to the target page
-        // sessionStorage.setItem('useID', props.user);
         const queryParams = new URLSearchParams();
         queryParams.append('productid', props.id);
         navigate(`/prod?${queryParams.toString()}`);

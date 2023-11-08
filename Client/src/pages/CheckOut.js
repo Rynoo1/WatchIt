@@ -63,26 +63,26 @@ useEffect(() => {
   };
 
   return (  
-    <div className="vh-100" >
+    <div className="min-vh-100 pb-3" >
       <Container>
         <Row>
-          <Col className="backgaccent me-2">
+          <Col className="backgprime me-2">
             <h3 className="roboto mt-2 blue"> Personal Information </h3>
             <Form className="mt-4">
               <Form.Group as={Row} className="mb-2">
-                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed white"> Full Name </Form.Label>
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed accent"> Full Name </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setName(e.target.value)} id="nameIn" />
                 </Col>
               </Form.Group>
               <Form.Group as={Row} className="mb-2">
-                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed white"> Email Address </Form.Label>
+                <Form.Label column xl={{ span: 3, offset: 1 }} className="condensed accent"> Email Address </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" id="emailIn" />
                 </Col>
               </Form.Group>
               <Form.Group as={Row} className="mb-2">
-                <Form.Label  column  xl={{ span: 3, offset: 1 }}  className="condensed white"> Physical Address </Form.Label>
+                <Form.Label  column  xl={{ span: 3, offset: 1 }}  className="condensed accent"> Physical Address </Form.Label>
                 <Col xl={5}>
                   <Form.Control onChange={(e) => setAddress(e.target.value)} id="addressIn" />
                 </Col>

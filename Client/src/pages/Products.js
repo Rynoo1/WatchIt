@@ -66,9 +66,11 @@ function Products() {
                                         <li onClick={event => handleAll(event, 'All')} className='listitem' >All</li>
                                         <li onClick={event => handleFilterBrand(event, 'Casio')} className='listitem' >Casio</li>
                                         <li onClick={event => handleFilterBrand(event, 'Cartier')} className='listitem' >Cartier</li>
-                                        <li onClick={event => handleFilterBrand(event, 'Patek Philippe')} className='listitem' >Patek Philippe</li>
+                                        <li onClick={event => handleFilterBrand(event, 'Patek Phillippe')} className='listitem' >Patek Philippe</li>
                                         <li onClick={event => handleFilterBrand(event, 'Fossil')} className='listitem' >Fossil</li>
                                         <li onClick={event => handleFilterBrand(event, 'Tissot')} className='listitem' >Tissot</li>
+                                        <li onClick={event => handleFilterBrand(event, 'Seiko')} className='listitem' >Seiko</li>
+                                        <li onClick={event => handleFilterBrand(event, 'Hamilton')} className='listitem' >Hamilton</li>
                                     </ul>
                                 </Accordion.Body>
                             </Accordion.Item>

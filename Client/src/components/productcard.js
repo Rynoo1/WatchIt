@@ -35,6 +35,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
     const [uPrice, setUPrice] = useState();
     const [uStock, setUStock] = useState();
     const [uYear, setUYear] = useState();
+    const [uDesc, setUDesc] = useState();
     const [uImage, setUImage] = useState(image);
 
     let id2 = id;
@@ -72,7 +73,8 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
             strap: uStrap,
             size: uSize,
             stock: uStock,
-            price: uPrice
+            price: uPrice,
+            description: uDesc
         }
         payloadUp.append('information', JSON.stringify(details));
         payloadUp.append('imageUp', uImage);
@@ -150,7 +152,7 @@ const ProductCard = ({ id, brand, price, model, stock, strap, size, year, image 
                         </tbody>
                     </Table>
                     <Row>
-                        <Col xs={6}> <Form.Control as={'textarea'} rows={3} placeholder='Description' /> </Col>
+                        <Col xs={6}> <Form.Control as={'textarea'} rows={3} onChange={(e) => setUDesc(e.target.value)} placeholder='Description' /> </Col>
                         <Col xs={6}>
                             <Row> <Form.Control onChange={getImage} placeholder={image} type="file" /> </Row>
                             <Row> <Col xs={6} className='pt-2'> <Image thumbnail id='previewEdit'  /> </Col>  </Row>

@@ -17,6 +17,8 @@ function Inventory() {
     const [pStock, setPStock] = useState();
     const [pYear, setPYear] = useState();
     const [pImage, setPImage] = useState();
+    const [pDesc, setPDesc] = useState();
+    
 
     const getImage = (e) => {
         let imageFile = e.target.files[0];
@@ -57,6 +59,7 @@ function Inventory() {
             size: pSize,
             stock: pStock,
             price: pPrice,
+            description: pDesc
         }
 
         payload.append('information', JSON.stringify(details));
@@ -162,7 +165,7 @@ function Inventory() {
 
                                     <Col xs={6}>
                                         <FormLabel className='roboto h4'> Description </FormLabel>
-                                        <Form.Control as={'textarea'} rows={3} placeholder='Description' />
+                                        <Form.Control as={'textarea'} rows={3} onChange={(e) => setPDesc(e.target.value)} placeholder='Description' />
                                     </Col>
 
                                     <Col xs={6} className='pt-2'> <Image thumbnail id='preview' /> </Col>
