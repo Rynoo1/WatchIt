@@ -21,7 +21,7 @@
     E-Commerce web application for watches
     <br />
     ·
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://drive.google.com/file/d/1jvRSXFn-Iq1vtbiTRCvSAZWxFY51oS26/view?usp=sharing">View Demo</a>
     ·
   </p>
 </div>
@@ -300,8 +300,7 @@ Depending on if the user is signed in, and which user is signed in, a different 
 
 
 ## Final Outcome
-* demo video
-* promo video
+* [Demo Video](https://drive.google.com/file/d/1jvRSXFn-Iq1vtbiTRCvSAZWxFY51oS26/view?usp=sharing)
 
 <!-- LICENSE -->
 ## License
