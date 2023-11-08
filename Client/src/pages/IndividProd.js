@@ -14,7 +14,6 @@ function IndividProd() {
   const [errorMes, setErrorMes] = useState();
   const [showError, setShowError] = useState(false);
 
-
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const productid = searchParams.get('productid');

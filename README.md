@@ -62,7 +62,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Alt text](readme_images/Screenshot%202023-11-08%20at%2016.00.02.png)
 
 WatchIt is an E-commerce web application for the sale of watches. Users can navigate the site and browse the products, however, if they would like to make a purchase and check out, they would have to sign in or create an account. There are two types of accounts, a User account and an Admin account. The User accounts allows the user to make purchases and view the products, while the Admin account allows the admin user to add, edit or delete products from the database, as well as view the orders to dispatch orders when they have been completed. WatchIt is fully responsive and is made for all screen sizes!
 
@@ -113,10 +113,10 @@ git clone https://github.com/Rynoo1/WatchIt
 cd watchit
 ```
 **3. Set up the Backend**
-1. Install Express.js and dependencies: Navigate to the server and install Express.js along with all the necessary dependencies
+1. Install Express.js and dependencies: Navigate to the server and the necessary dependencies.
 ```sh
 cd server
-npm install express jsonwebtoken joi bcrypt multer nodemon
+npm install
 ```
 2. Install Mongoose: Mongoose is a library for MongoDB
 ```sh
@@ -153,11 +153,33 @@ You can now access the application through your web browser at `http://localhost
 
 ## Project Features
 
---Adding, editing, deleting products
---Checking out
---Filters
---Dispatching orders
---Creating profile/logging in
+* **Filters**
+![Alt text](readme_images/Blue%20iMac%20Front-3.png)
+Users can filter products by various categories such as brand or strap material and view all watches that fit that description.
+<br/>
+
+* **Inventory Management**
+
+![Alt text](readme_images/Blue%20iMac%20Front.png)
+
+<br/>
+
+![Alt text](readme_images/Blue%20iMac%20Front-1.png)
+Through the Inventory management page, the admin users are able to update, delete and add products to the database. The changes are then instantly made and updated on the web page. Admins are able to update products through the above pop up.
+
+![Alt text](readme_images/Blue%20iMac%20Front-4.png)
+Admins can easily add new watches by completing this form.
+
+
+* **Checking Out**
+![Alt text](readme_images/Blue%20iMac%20Front-2.png)
+Users can complete their orders and check out on the check out page. Only users who have created an account and logged in are able to check out an order. The user is also able to make last minute changes to their cart on the check out page, after which the total is updated. Once successfully checked out, an order is created.
+<br/>
+
+* **Dispatching Orders**
+![Alt text](readme_images/Blue%20iMac%20Front-5.png)
+The Admin users can view orders and dispatch them once they have been completed.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -173,20 +195,109 @@ Creative and technical decisions made. Describe architecture of the systems, the
 ![Alt text](readme_images/WatchIt%20Data%20Flow%20Diagram(1).png)
 
 <br/>
-challenges faced
 
--image handling using multer
+**Development Challenges**
 
--user authentication with hashing and bcrypt, jwt, etc
+* **Image handling using Multer:**
+This project uses Multer middleware to handle the uploading and displaying of images. The process of setting this up and using it for the first time took longer than expected and there were a few issues during this process. Initially, if a product was updated without an image included it would delete the existing image and leave it with no image. This was fixed with an if statement in the routes to check if a file is included in the upload and then either updating the image field or leaving it. After this I noticed that it would upload new images everytime it was updated and not delete images when the product is deleted. So I used the built in file system module to update the image instead of uploading a separate new image and delete the image if the product is deleted.
+```js
+//deleting
+router.delete('/api/watch/:id', async (req, res) => {
+    try {
+        const watch = await WatchSchema.findById(req.params.id);
+        if (!watch) {
+            return res.status(404).json({ message: "Watch not Found!" });
+        }
 
--passing product id to individual product page
---used session storage, then url
+        if (watch.image) {
+            fs.unlink(`./images/${watch.image}`, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
 
--displaying navbar and footer differently dependig on who is signed in
---sesstion storage and && if statement
+        await watch.deleteOne();
+        res.status(201).json({ message: "Watch successfully deleted!" });
+    } catch (error) {
+        console.error("Error deleting Watch: ", error);
+        res.status(500).json(error);
+    }
+})
 
--cart link removing product id from url??
---used a tag instead of navlink
+//updating
+router.put('/api/watch/:id', upload.single('imageUp'), async (req, res) => {
+
+    let data = JSON.parse(req.body.information)
+    if (req.file) {
+
+        const existing = await WatchSchema.findById(req.params.id);
+        if (existing.image) {
+            fs.unlink(`./images/${existing.image}`, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        const update = ({
+            brand: data.brand,
+            model: data.model,
+            year: data.year,
+            strap: data.strap,
+            size: data.size,
+            price: data.price,
+            stock: data.stock,
+            description: data.description,
+            image: req.file.filename
+        })
+        await WatchSchema.findByIdAndUpdate(req.params.id, update)
+            .then(response => res.json(response))
+            .catch(error => res.status(500).json(error))
+    } else {
+        const update = ({
+            brand: data.brand,
+            model: data.model,
+            year: data.year,
+            strap: data.strap,
+            size: data.size,
+            price: data.price,
+            stock: data.stock,
+            description: data.description
+        })
+        await WatchSchema.findByIdAndUpdate(req.params.id, update)
+            .then(response => res.json(response))
+            .catch(error => res.status(500).json(error))
+    }
+})
+```
+<br/>
+
+* **User Authentication:**
+For user authentication I used bcrypt to hash passwords and JWT to create authentication tokens. I then stored this and information like user rank in the local storage to easily check if a user is logged in and if they have access to certain pages or not.
+<br/>
+
+* **Product ID:**
+To get the correct product ID from the products or home page to the individual products page to load the correct product information from the database I initially used session storage. However, I updated this to using the URL instead and implemented updated error handling for if there are mistakes in the URL. This update gave every product it's own URL that could be shared and would preserve the product if the user went back into their history.
+```js
+//setting URL when going from all products to individual product page
+  const handleButtonClick = () => {
+      const queryParams = new URLSearchParams();
+      queryParams.append('productid', props.id);
+      navigate(`/prod?${queryParams.toString()}`);
+  };
+
+//using product ID from URL on individual product page
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const productid = searchParams.get('productid');
+
+```
+<br/>
+
+* **Displaying the correct Navbar and Footer:**
+Depending on if the user is signed in, and which user is signed in, a different navbar and footer is displayed that has different navigation options. This was achieved by checking the local storage for the user's details such as logged in and admin status and then doing conditional checks to display the correct footer or navbar.
+<br/>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -225,35 +336,6 @@ LinkedIn - https://www.linkedin.com/in/rynodebeer01/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
 [MongoDB]: https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white
 [MongoDB-url]: https://www.mongodb.com/
 [Mongoose]: https://img.shields.io/badge/Mongoose-880000?logo=mongoose&logoColor=white
