@@ -4,11 +4,12 @@ const router = express();
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+import medusa from "../../Client/src/lib/medusa-config"
 
 //get all watches
 router.get('/api/getwatches', async (req, res) => {
     try {
-        const findWatches = await WatchSchema.find();
+        const findWatches = await medusa.store.product.list();
         res.json(findWatches);
     } catch (error) {
         res.status(500).json(error);

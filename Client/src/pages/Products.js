@@ -4,17 +4,19 @@ import AllProdCard from '../components/allprodcard'
 import Axios from 'axios'
 import '../products.css'
 import Footer from '../components/footer'
+import { sdk } from '../lib/medusa-config'
 
 function Products() {
     const [title, setTitle] = useState('All');
     const [allProd, setAllProd] = useState();
+    const [products, setProducts] = useState([]);
     const [reRender, setReRender] = useState(false);
     const [call, setCall] = useState('http://localhost:5002/api/getwatches');
     // const [updateWatches, setUpdateWatches] = useState(true)
 
     // find and display watches in brand filter
     const handleFilterBrand = (event, param) => {
-        setCall('http://localhost:5002/api/brandwatches/' + param);
+        setCall('http://localhost:5002/api/brandwatches/' + param); 
         console.log(param);
         setReRender(true);
         setTitle(param);
@@ -35,19 +37,40 @@ function Products() {
         setTitle(param);
     };
 
+        const handleAllList = async () => {
+            try {
+                console.log("calling store api");
+                console.log(process.env.REACT_APP_NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY);
+                const { products } = await sdk.store.product.list({
+                    limit: 20,
+                    region_id: "reg_01K42NZ85N3782EA5X8YJRQEC8",
+                });
+
+                setProducts(products);
+                console.log(products);
+                setReRender(true);
+            } catch (error) {
+                console.error('Error fetching products: ', error);
+            }
+        };
+
+
     // load and display all watches
     useEffect(() => {
+
         Axios.get(call)
             .then(result => {
                 let data = result.data;
                 console.log(data);
-                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} id={temp._id} brand={temp.brand} price={temp.price} model={temp.model} image={temp.image} />);
+                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} id={temp._id} brand={temp.title} price={temp.price} model={temp.model} image={temp.image} />);
                 setAllProd(renderProducts);
                 setReRender(false);
                 // console.log(allProd);
                 // setUpdateWatches(false);
             })
             .catch(err => console.log(err));
+
+            handleAllList();
 
     }, [reRender])
 
@@ -63,7 +86,7 @@ function Products() {
                                 <Accordion.Header className='header roboto'> Brands </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
                                     <ul className='no-bullets' id='brands'>
-                                        <li onClick={event => handleAll(event, 'All')} className='listitem' >All</li>
+                                        <li onClick={event => handleAllList()} className='listitem' >All</li>
                                         <li onClick={event => handleFilterBrand(event, 'Casio')} className='listitem' >Casio</li>
                                         <li onClick={event => handleFilterBrand(event, 'Cartier')} className='listitem' >Cartier</li>
                                         <li onClick={event => handleFilterBrand(event, 'Patek Phillippe')} className='listitem' >Patek Philippe</li>
@@ -92,7 +115,33 @@ function Products() {
                     <Col className='blue roboto mx-2'>
                         <h1 className='roboto'>{title}</h1>
                         <Row>
-                            {allProd}
+                            {/* {products.map((product) => (
+                                      <AllProdCard
+                                          key={product.id}
+                                          id={product.id}
+                                          brand={product.title}
+                                          price={product.variants?.[0].prices?.[0].amount}
+                                          image={product.thumbnail}
+                                        />
+                            ))} */}
+                            {/* {allProd} */}
+
+                            {products.map((product) => {
+                                const price = product.variants?.[0]?.calculated_price?.calculated_amount
+
+                                console.log("Price for", product.title, ":", price)
+
+                                return (
+                                    <AllProdCard
+                                    key={product.id}
+                                    id={product.id}
+                                    brand={product.title}
+                                    price={price}
+                                    image={product.thumbnail}
+                                    />
+                                )
+                            })}
+
                         </Row>
                     </Col>
                 </Row>
