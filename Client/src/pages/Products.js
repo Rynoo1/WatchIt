@@ -5,6 +5,8 @@ import Axios from 'axios'
 import '../products.css'
 import Footer from '../components/footer'
 import { sdk } from '../lib/medusa-config'
+import Medusa from '@medusajs/js-sdk'
+import { useCart } from '../context/CartContext'
 
 function Products() {
     const [title, setTitle] = useState('All');
@@ -12,6 +14,13 @@ function Products() {
     const [products, setProducts] = useState([]);
     const [reRender, setReRender] = useState(false);
     const [call, setCall] = useState('http://localhost:5002/api/getwatches');
+    const [cartItem, setCartItem] = useState(null);
+    
+
+    const { cart, cartId, getCart } = useCart();
+
+    // console.log(cart);
+
     // const [updateWatches, setUpdateWatches] = useState(true)
 
     // find and display watches in brand filter
@@ -37,40 +46,54 @@ function Products() {
         setTitle(param);
     };
 
-        const handleAllList = async () => {
-            try {
-                console.log("calling store api");
-                console.log(process.env.REACT_APP_NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY);
-                const { products } = await sdk.store.product.list({
-                    limit: 20,
-                    region_id: "reg_01K42NZ85N3782EA5X8YJRQEC8",
-                });
+    // const retCart = async () => {
+    //     const gc = await getCart();
+    //     console.log('gc:', gc);
+    //     setCartItem(gc);
+    //     console.log('Retrieve:', cartItem);
+    // }
 
-                setProducts(products);
-                console.log(products);
-                setReRender(true);
-            } catch (error) {
-                console.error('Error fetching products: ', error);
-            }
-        };
+    const handleAllList = async () => {
+        try {
+            console.log("calling store api");
+            // console.log(process.env.REACT_APP_NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY);
+            const { products } = await sdk.store.product.list({
+                limit: 20,
+                region_id: "reg_01K42NZ85N3782EA5X8YJRQEC8",
+            });
 
+            setProducts(products);
+            console.log(products);
+            setReRender(true);
+        } catch (error) {
+            console.error('Error fetching products: ', error);
+        }
+    };
 
     // load and display all watches
     useEffect(() => {
 
-        Axios.get(call)
-            .then(result => {
-                let data = result.data;
-                console.log(data);
-                let renderProducts = data.map((temp) => <AllProdCard key={temp._id} id={temp._id} brand={temp.title} price={temp.price} model={temp.model} image={temp.image} />);
-                setAllProd(renderProducts);
-                setReRender(false);
-                // console.log(allProd);
-                // setUpdateWatches(false);
-            })
-            .catch(err => console.log(err));
+        // Axios.get(call)
+        //     .then(result => {
+        //         let data = result.data;
+        //         console.log(data);
+        //         let renderProducts = data.map((temp) => <AllProdCard key={temp._id} id={temp._id} brand={temp.title} price={temp.price} model={temp.model} image={temp.image} />);
+        //         setAllProd(renderProducts);
+        //         setReRender(false);
+        //         // console.log(allProd);
+        //         // setUpdateWatches(false);
+        //     })
+        //     .catch(err => console.log(err));
+
+        const retCart = async () => {
+            const gc = await getCart();
+            console.log('gc:', gc);
+            setCartItem(gc);
+            console.log('Retrieve:', cartItem);
+    };
 
             handleAllList();
+            retCart();
 
     }, [reRender])
 
@@ -78,11 +101,11 @@ function Products() {
         <div  className='backgprime' >
             <div className='backgprime px-5 pb-4'>
                 <Row>
-                    <Col md={12} lg={2} className='backgblue my-2 rounded'>
+                    {/* <Col md={12} lg={2} className='backgblue my-2 rounded'>
                         <h1 className='roboto prime pt-1'>Filters</h1>
                         <Accordion flush className='my-2 custom-accordion'>
                             <Accordion.Item eventKey='0' className='custom-accordion'>
-                                {/* accordion for brand filters */}
+                                accordion for brand filters
                                 <Accordion.Header className='header roboto'> Brands </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
                                     <ul className='no-bullets' id='brands'>
@@ -98,7 +121,7 @@ function Products() {
                                 </Accordion.Body>
                             </Accordion.Item>
 
-                            {/* accordion for strap filters */}
+                            accordion for strap filters
                             <Accordion.Item eventKey='1'>
                                 <Accordion.Header className='header roboto'> Straps </Accordion.Header>
                                 <Accordion.Body style={{ color: '#FF5035', backgroundColor: '#2C3439' }}>
@@ -111,7 +134,7 @@ function Products() {
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
-                    </Col>
+                    </Col> */}
                     <Col className='blue roboto mx-2'>
                         <h1 className='roboto'>{title}</h1>
                         <Row>
@@ -127,18 +150,9 @@ function Products() {
                             {/* {allProd} */}
 
                             {products.map((product) => {
-                                const price = product.variants?.[0]?.calculated_price?.calculated_amount
-
-                                console.log("Price for", product.title, ":", price)
-
+                                // const price = product.variants?.[0]?.calculated_price?.calculated_amount
                                 return (
-                                    <AllProdCard
-                                    key={product.id}
-                                    id={product.id}
-                                    brand={product.title}
-                                    price={price}
-                                    image={product.thumbnail}
-                                    />
+                                    <AllProdCard product={product} region={'ZAR'}/>
                                 )
                             })}
 

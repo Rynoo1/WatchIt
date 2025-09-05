@@ -6,42 +6,53 @@ import NavbarBrand from 'react-bootstrap/esm/NavbarBrand';
 import { Link, NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { Modal, Table, Image, Row, Col, Button } from 'react-bootstrap';
+import { useCart } from '../context/CartContext'; 
+import CartModal from './cartModal';
 // import Cart from './cart';
 
 export default function NavBar1() {
   const [show, setShow] = useState(false);
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
+  // const [cart, setCart] = useState([]);
+  // const [total, setTotal] = useState(0);
+  const {
+    cart, 
+    addToCart, 
+    updateCartItem, 
+    removeFromCart, 
+    getCartTotal, 
+    getCartItemCount, 
+    isCartLoading 
+  } = useCart();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   // get cart from session storage
-  useEffect(() => {
-    try {
-      const cartData = JSON.parse(sessionStorage.getItem('Cart')) || [];
-      setCart(cartData);
+  // useEffect(() => {
+  //   try {
+  //     const cartData = JSON.parse(sessionStorage.getItem('Cart')) || [];
+  //     setCart(cartData);
 
-      // Calculate the total price of items in the cart
-      const cartTotal = cartData.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      setTotal(cartTotal);
-    } catch (error) {
-      console.log('cart empty');
-    }
-  }, [show]);
+  //     // Calculate the total price of items in the cart
+  //     const cartTotal = cartData.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  //     setTotal(cartTotal);
+  //   } catch (error) {
+  //     console.log('cart empty');
+  //   }
+  // }, [show]);
 
   // remove an item from the cart
-  const removeFromCart = (itemKey) => {
-    const updatedCart = cart.filter((item) => item.key !== itemKey);
-    setCart(updatedCart);
+  // const removeFromCart = (itemKey) => {
+  //   const updatedCart = cart.filter((item) => item.key !== itemKey);
+  //   setCart(updatedCart);
 
-    // Calculate the new total
-    const newTotal = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    setTotal(newTotal);
+  //   // Calculate the new total
+  //   const newTotal = updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  //   setTotal(newTotal);
 
-    // Update sessionStorage with the updated cart
-    sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
-  };
+  //   // Update sessionStorage with the updated cart
+  //   sessionStorage.setItem('Cart', JSON.stringify(updatedCart));
+  // };
 
   const handleCheck = (e) => {
     const token = localStorage.getItem("token");
@@ -69,14 +80,19 @@ export default function NavBar1() {
 
           <Col xs={{ span: 1, offset: 2 }} >
             <Nav className='ms-auto pt-2'>
-              <a href='#' className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </a>
+              <a href='/cart' className='linkaccent' onClick={handleShow}> <h3 className='roboto'>Cart</h3> </a>
             </Nav>
           </Col>
         </Row>
       </Container>
 
+    <CartModal 
+      show={show} 
+      handleClose={handleClose}
+    />
+
       {/* Cart Modal */}
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title> Current Cart </Modal.Title>
         </Modal.Header>
@@ -92,16 +108,16 @@ export default function NavBar1() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
-                <tr key={item.key}>
+              {cart.items.map((item) => (
+                <tr key={item.id}>
                   <td> <Image fluid src={'http://localhost:5002/images/' + item.image}/> </td>
-                  <td> {item.brand} {item.model} </td>
-                  <td> {item.quantity} </td>
-                  <td>R {item.price * item.quantity}</td>
+                  <td> {item.title} </td>
+                  <td> {item.items[0].quantity} </td>
+                  {/* <td>R {item.price * item.quantity}</td>
                   <td>
                     <Button variant='add' onClick={() => removeFromCart(item.key)}>Remove</Button>
-                  </td>
-                </tr>
+                  </td> */}
+                {/* </tr>
               ))}
             </tbody>
           </Table>
@@ -111,13 +127,13 @@ export default function NavBar1() {
             <thead>
               <tr>
                 <th>Total:</th>
-                <th className='right'>R {total}</th>
+                <th className='right'>R 20</th>
               </tr>
             </thead>
           </Table>
           { cart[0] && <Button variant='add' onClick={handleCheck}> Checkout </Button>}
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </Navbar>
   );
 }
